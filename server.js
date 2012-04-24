@@ -23,6 +23,7 @@ app.configure(function(){
     secret: "VPhh24piSlwBoNwqFVVPhh42piSlBoNwwqFV",
     store: new RedisStore
   }))
+  app.use(require('connect-assets')());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });

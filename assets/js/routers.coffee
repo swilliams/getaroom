@@ -12,9 +12,7 @@ jQuery ->
 
 		chat: ->
 			if $('#users')
-				@userView = new app.UserGridView collection: app.Users
-				@userView.render()
-
+				chatView = new app.ChatMasterView
 
 	@app = window.app ? {}
 	@app.router = new AppRouter

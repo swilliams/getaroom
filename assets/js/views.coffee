@@ -18,6 +18,12 @@ jQuery ->
 			form = @getForm()
 			form.submit()
 
+	class ChatMasterView extends Backbone.View
+		initialize: ->
+			@userView = new app.UserGridView collection: app.Users
+			@userView.render()
+
+
 	class UserGridView extends Backbone.View
 		el: '#users'
 
@@ -39,6 +45,9 @@ jQuery ->
 			@$el.html @model.get('name')
 			@
 
+
+
 	@app = window.app ? {}
 	@app.LoginView = LoginView
 	@app.UserGridView = UserGridView
+	@app.ChatMasterView = ChatMasterView

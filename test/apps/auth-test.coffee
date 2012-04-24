@@ -13,5 +13,5 @@ describe "auth", ->
 				_body = body
 				done()
 
-		it "has user field", ->
-			assert.ok /user/.test(_body)
+		it "has title", ->
+			assert.hasTag _body, '//head/title', 'Login'

@@ -4,13 +4,15 @@ html
 		title= title
 		link(rel='stylesheet', href='/stylesheets/bootstrap.css')
 		link(rel='stylesheet', href='/stylesheets/screen.css')
+
+		script(src='/javascripts/Vendor/jquery-1.7.2.js')
 	body
 		div.navbar(class="navbar-fixed-top")
 			div.navbar-inner
 				div.container
 					a.brand(href="#") Home
 					- if (session.currentUser)
-						ul.nav(class="pull-right")
+						ul#login_container.nav(class="pull-right")
 							li
 								a
 									= session.currentUser

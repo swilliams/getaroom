@@ -1,8 +1,10 @@
-form(action='/sessions', method='post')
-	label
-		| Username
-		input(type='text', name='user')
-	label
-		| Password
-		input(type='password', name='password')
-	input(type='submit', name='Log In')
+div.row
+	form.span6(action='/sessions', method='post', class='offset3')
+		header
+			h1 What are you called?
+
+		p
+			| Right now we don't have any fancy-pants "authentication", so just tell us what your name is and move along.
+		label
+			input(type='text', name='user', placeholder='Your Name')
+		input.btn.btn-primary(type='submit', value='Log In')

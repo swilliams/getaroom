@@ -3,7 +3,7 @@ routes = (app) ->
 	app.get '/login', (req, res) ->
 		res.render "#{__dirname}/views/login", 
 			title: 'Login'
-			stylesheet: 'temp'
+			session: req.session
 
 	app.post '/sessions', (req, res) ->
 		req.session.currentUser = req.body.user
@@ -11,7 +11,7 @@ routes = (app) ->
 		res.redirect '/login'
 		return
 
-	app.del '/sessions', (req, res) ->
+	app.post '/logout', (req, res) ->
 		req.session.regenerate (err) ->
 			req.flash 'info', 'You have been logged out'
 			res.redirect '/login'

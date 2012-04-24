@@ -4,13 +4,32 @@ html
 		title= title
 		link(rel='stylesheet', href='/stylesheets/bootstrap.css')
 		link(rel='stylesheet', href='/stylesheets/screen.css')
+
+		!= js('app')
 	body
-		h1= title
+		div.navbar(class="navbar-fixed-top")
+			div.navbar-inner
+				div.container
+					a.brand(href="#") Home
+					ul#login_container.nav(class="pull-right")
+						- if (session.currentUser)
+							li
+								a
+									= session.currentUser
+							li
+								form(action='/logout', method='post')
+									a#logout(href="logout") Logout
+						- else
+							li
+								a(href="/login") Login
 
-		- var flashTypes = ['info', 'error']
-		each flashType in flashTypes
-			if flash[flashType]
-				p.flash(class=flashType)
-					= flash[flashType]
 
-		!= body
+
+		div.container#main
+			- var flashTypes = ['info', 'error']
+			each flashType in flashTypes
+				if flash[flashType]
+					p.flash(class=flashType)
+						= flash[flashType]
+
+			!= body

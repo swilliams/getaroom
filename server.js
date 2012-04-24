@@ -24,6 +24,7 @@ app.configure(function(){
     secret: "VPhh24piSlwBoNwqFVVPhh42piSlBoNwwqFV",
     store: new RedisStore
   }))
+  app.use(require('connect-assets')());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
@@ -46,6 +47,7 @@ require('./apps/helpers')(app);
 // Routes
 
 require('./apps/auth/routes')(app);
+require('./apps/chat/routes')(app);
 
 app.listen(app.settings.port, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

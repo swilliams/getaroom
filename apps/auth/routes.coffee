@@ -4,6 +4,7 @@ routes = (app) ->
 		res.render "#{__dirname}/views/login", 
 			title: 'Login'
 			stylesheet: 'temp'
+			session: req.session
 
 	app.post '/sessions', (req, res) ->
 		req.session.currentUser = req.body.user

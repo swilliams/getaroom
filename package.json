@@ -12,5 +12,8 @@
     "mocha": "~1.0.1",
     "request": "~2.9.202",
     "libxmljs": "~0.5.4"
+  },
+  "scripts": {
+  	"test": "./bin/test"
   }
 }

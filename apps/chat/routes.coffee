@@ -7,4 +7,7 @@ routes = (app) ->
 			session: req.session
 			users: [req.session.currentUser]
 
+	app.post '/chat', (req, res) ->
+		console.log 'saved!'
+
 module.exports = routes

@@ -8,6 +8,7 @@ class Message extends Backbone.Model
 
 	save: ->
 		console.log 'save' + @get('text')
+		super()
 
 
 @app = window.app ? {}

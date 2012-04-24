@@ -1,3 +1,8 @@
+class User extends Backbone.Model
+	initialize: ->
+	
+
+
 class Message extends Backbone.Model
 	initialize: ->
 

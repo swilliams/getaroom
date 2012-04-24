@@ -12,7 +12,8 @@ routes = (app) ->
 		res.redirect '/login'
 		return
 
-	app.del '/sessions', (req, res) ->
+	app.post '/logout', (req, res) ->
+		console.log "logout"
 		req.session.regenerate (err) ->
 			req.flash 'info', 'You have been logged out'
 			res.redirect '/login'

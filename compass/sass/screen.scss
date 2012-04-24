@@ -3,7 +3,29 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
+$navlink: #999;
+$navlink-hover: #fff;
+
 #main {
 	position: relative;
 	top: 50px;
 } 
+
+.navbar .nav > li > form {
+	padding: 10px 10px 0;
+	margin-bottom: 0;
+
+	> a {
+		padding: 0;
+		color: $navlink;
+		float: none;
+		line-height: 19px;
+		text-decoration: none;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+
+		&:hover {
+			color: $navlink-hover;
+		}
+	}
+
+}

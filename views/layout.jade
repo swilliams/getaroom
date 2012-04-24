@@ -11,13 +11,17 @@ html
 			div.navbar-inner
 				div.container
 					a.brand(href="#") Home
-					- if (session.currentUser)
-						ul#login_container.nav(class="pull-right")
+					ul#login_container.nav(class="pull-right")
+						- if (session.currentUser)
 							li
 								a
 									= session.currentUser
 							li
-								a#logout(href="/sessions") Logout
+								form(action='/logout', method='post')
+									a#logout(href="logout") Logout
+						- else
+							li
+								a(href="/login") Login
 
 
 

@@ -10,4 +10,4 @@
 #= require 'routers'
 
 jQuery ->
-	Backbone.history.start(pushState: true)
+	Backbone.history.start pushState: true

@@ -1,3 +1,8 @@
+class Users extends Backbone.Collection
+	type: app.User
+
+	initialize: ->
+
 class Messages extends Backbone.Collection
 	type: app.Message
 
@@ -5,3 +10,4 @@ class Messages extends Backbone.Collection
 
 @app = window.app ? {}
 @app.Messages = Messages
+@app.Users = new Users

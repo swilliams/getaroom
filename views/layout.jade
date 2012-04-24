@@ -12,6 +12,9 @@ html
 					- if (session.currentUser)
 						ul.nav(class="pull-right")
 							li
+								a
+									= session.currentUser
+							li
 								a#logout(href="/sessions") Logout
 
 

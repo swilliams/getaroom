@@ -8,7 +8,7 @@ describe "auth", ->
 
 		before (done) ->
 			options = 
-				uri: 'http://localhost:3000/login'
+				uri: "http://localhost:#{app.settings.port}/login"
 			request options, (err, res, body) ->
 				_body = body
 				done()

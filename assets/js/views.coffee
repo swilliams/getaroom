@@ -14,15 +14,39 @@ jQuery ->
 
 		logout: (ev) ->
 			ev.preventDefault()
-			console.log "logout"
 			form = @getForm()
 			form.submit()
 
 	class ChatMasterView extends Backbone.View
 		initialize: ->
-			@userView = new app.UserGridView collection: app.Users
+			@setupUserView()
+			@setupChatEntry()
+
+		setupUserView: ->
+			@userView = new UserGridView collection: app.Users
 			@userView.render()
 
+		setupChatEntry: ->
+			@chatEntryView = new ChatEntryView
+			@chatEntryView.render()
+
+	class ChatEntryView extends Backbone.View
+		el: '#chat_entry'
+		initialize: ->
+
+		events:
+			'submit form' : 'addChat'
+
+		render: ->
+			@
+
+		getText: ->
+			@$('input[name=chat]').val()
+
+		addChat: (ev) ->
+			ev.preventDefault()
+			newMessage = new app.Message text: @getText()
+			newMessage.save()
 
 	class UserGridView extends Backbone.View
 		el: '#users'

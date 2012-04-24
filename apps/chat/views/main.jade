@@ -5,8 +5,11 @@ div.row
 	div.span4#users
 div.row
 	div.span12#chat_entry
+		form.form-inline
+			input.chat.span7(type='text', name='chat')
+			input.btn.btn-primary#sayit(type='submit', value='Say It')
 
 script(type='text/javascript')
 	$(function() {
 		window.app.Users.reset([{name: 'swilliams' }, {name: 'derp'} ]);
-	})
+	});

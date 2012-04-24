@@ -6,10 +6,11 @@
 require('coffee-script');
 
 var express = require('express'),
-    RedisStore = require('connect-redis')(express),
-    io = require ('socket.io').listen(app);
+    RedisStore = require('connect-redis')(express);
 
 var app = module.exports = express.createServer();
+
+require('./apps/socket-io')(app);
 
 // Configuration
 

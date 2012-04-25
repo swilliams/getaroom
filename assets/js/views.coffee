@@ -24,7 +24,7 @@ jQuery ->
 			@setupChatView()
 
 		setupUserView: ->
-			@userView = new UserGridView collection: app.Users
+			@userView = new UserGridView collection: new app.Users
 			@userView.render()
 
 		setupChatEntry: ->
@@ -61,7 +61,7 @@ jQuery ->
 		initialize: ->
 
 		render: ->
-			template = "<div class=\"message\">MESSAGE: #{@model.get('content')}</div>"
+			template = "<div class=\"message\">#{@model.get('user')}: #{@model.get('content')}</div>"
 			@$el.html template
 			@
 
@@ -88,12 +88,15 @@ jQuery ->
 
 		initialize: ->
 			@collection.bind 'reset', @render, @
+			@collection.bind 'add', @addUser, @
 
 		render: ->
 			@$el.empty()
-			for user in @collection.models
-				view = new UserView model: user
-				@$el.append view.render().el
+			@addUser user for user in @collection.models
+
+		addUser: (user) ->
+			view = new UserView model: user
+			@$el.append view.render().el
 
 	class UserView extends Backbone.View
 		className: 'user'

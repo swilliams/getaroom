@@ -16,7 +16,7 @@ routes = (app) ->
 	app.post '/chat', (req, res) ->
 		text = req.body.content
 		if socketIO = app.settings.socketIO
-			socketIO.sockets.emit "msg:received", { content: text }
+			socketIO.sockets.emit "msg:received", { user: req.session.currentUser, content: text }
 		res.send text
 
 

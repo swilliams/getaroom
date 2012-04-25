@@ -18,6 +18,7 @@ app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.set('port', 3000);
+  app.set('userCount', 0);
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser());

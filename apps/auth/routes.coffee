@@ -8,7 +8,7 @@ routes = (app) ->
 	app.post '/sessions', (req, res) ->
 		req.session.currentUser = req.body.user
 		req.flash 'info', "You are now #{req.session.currentUser}"
-		res.redirect '/login'
+		res.redirect '/chat'
 		return
 
 	app.post '/logout', (req, res) ->

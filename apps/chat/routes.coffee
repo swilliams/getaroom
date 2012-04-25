@@ -8,6 +8,11 @@ routes = (app) ->
 			users: [req.session.currentUser]
 
 	app.post '/chat', (req, res) ->
-		console.log 'saved!'
+		text = req.body.content
+		if socketIO = app.settings.socketIO
+			socketIO.sockets.emit "msg:received", { content: text }
+		res.send text
+
+
 
 module.exports = routes

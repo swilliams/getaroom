@@ -7,7 +7,6 @@ class Message extends Backbone.Model
 	initialize: ->
 
 	save: ->
-		console.log 'save' + @get('text')
 		super()
 
 

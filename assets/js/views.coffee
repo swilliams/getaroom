@@ -21,6 +21,7 @@ jQuery ->
 		initialize: ->
 			@setupUserView()
 			@setupChatEntry()
+			@setupChatView()
 
 		setupUserView: ->
 			@userView = new UserGridView collection: app.Users
@@ -29,6 +30,40 @@ jQuery ->
 		setupChatEntry: ->
 			@chatEntryView = new ChatEntryView
 			@chatEntryView.render()
+
+		setupChatView: ->
+			@chatView = new ChatView collection: new app.Messages
+			@chatView.render()
+
+	class ChatView extends Backbone.View
+		el: '#chat'
+		subviews: null
+
+		initialize: ->
+			@subviews = []
+			window.foo = @collection
+			@collection.bind 'add', @addMessage, @
+
+
+		render: ->
+			@
+
+		addMessage: (msg) ->
+			view = @createMessageView msg
+			@subviews.push view
+			@$el.append view.render().el
+
+		createMessageView: (msg) ->
+			view = new MessageView model:msg
+			view
+
+	class MessageView extends Backbone.View
+		initialize: ->
+
+		render: ->
+			template = "<div class=\"message\">MESSAGE: #{@model.get('content')}</div>"
+			@$el.html template
+			@
 
 	class ChatEntryView extends Backbone.View
 		el: '#chat_entry'
@@ -45,7 +80,7 @@ jQuery ->
 
 		addChat: (ev) ->
 			ev.preventDefault()
-			newMessage = new app.Message text: @getText()
+			newMessage = new app.Message content: @getText()
 			newMessage.save()
 
 	class UserGridView extends Backbone.View

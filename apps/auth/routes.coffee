@@ -1,5 +1,12 @@
 routes = (app) ->
 
+	_addUser = (username) ->
+		app.settings.userCount += 1
+		user = { id: app.settings.userCount, name: username }
+		app.settings.userList.push user
+		console.log app.settings.userList
+		user
+
 	app.get '/login', (req, res) ->
 		res.render "#{__dirname}/views/login", 
 			title: 'Login'
@@ -8,10 +15,7 @@ routes = (app) ->
 	app.post '/sessions', (req, res) ->
 		req.session.currentUser = req.body.user
 		if socketIO = app.settings.socketIO
-			count = app.settings.userCount + 1
-			app.set 'userCount', count
-			user = { id: count, name: req.session.currentUser }
-			console.log user
+			user = _addUser req.session.currentUser
 			socketIO.sockets.emit "user:loggedIn", user
 		req.flash 'info', "You are now #{req.session.currentUser}"
 		res.redirect '/chat'

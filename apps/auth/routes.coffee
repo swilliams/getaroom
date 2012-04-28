@@ -5,9 +5,7 @@ routes = (app) ->
 
 	_addUser = (req, username, next) ->
 		User.getByUsername username, (resp, user) ->
-			console.log user
 			if user is null
-				console.log "null"
 				user = new User name: username
 				user.save()
 			req.session.currentUser = user
@@ -32,7 +30,7 @@ routes = (app) ->
 		return
 
 	app.post '/logout', (req, res) ->
-		userId = req.body.id
+		userId = req.session.currentUser.id
 		if socketIO = app.settings.socketIO
 			socketIO.sockets.emit "user:loggedOut", { id: userId }	
 			_removeUser userId

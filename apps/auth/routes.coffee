@@ -4,10 +4,12 @@ User = require '../../models/user'
 routes = (app) ->
 
 	_addUser = (req, username, next) ->
-		User.getByUsername username, (resp, user) ->
+		User.getByUsername username, (err, user) ->
 			if user is null
+				console.log "new user"
 				user = new User name: username
 				user.save()
+			console.log user
 			req.session.currentUser = user
 			next user
 

@@ -36,7 +36,7 @@ class User
 	save: (callback) ->
 		@generateId()
 		redis.hset User.key(), @id, JSON.stringify(@), (err, resp) =>
-			callback null, @
+			if callback? then callback null, @
 
 	destroy: (callback) ->
 		redis.hdel User.key(), @id, (err) ->

@@ -1,3 +1,5 @@
+User = require "../../models/user"
+
 routes = (app) ->
 	app.all '/chat', (req, res, next) ->
 		unless req.session.currentUser
@@ -8,9 +10,11 @@ routes = (app) ->
 
 	app.get '/chat', (req, res) ->
 		# get the list of users
-		res.render "#{__dirname}/views/main",
-			title: 'OMG Chat!'
-			session: req.session
+		User.all (err, users) ->
+			res.render "#{__dirname}/views/main",
+				title: 'OMG Chat!'
+				session: req.session
+				users: users
 
 	app.post '/chat', (req, res) ->
 		text = req.body.content

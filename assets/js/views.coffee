@@ -23,6 +23,9 @@ jQuery ->
 			@setupChatEntry()
 			@setupChatView()
 
+		preloadUsers: (users) ->
+			@userView.collection.reset users
+
 		setupUserView: ->
 			@userView = new UserGridView collection: new app.Users
 			@userView.render()

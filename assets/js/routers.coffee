@@ -12,7 +12,8 @@ jQuery ->
 
 		chat: ->
 			if $('#users')
-				chatView = new app.ChatMasterView
+				window.app.chatView = new app.ChatMasterView
+
 
 	@app = window.app ? {}
 	@app.router = new AppRouter

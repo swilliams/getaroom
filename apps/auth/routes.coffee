@@ -1,12 +1,13 @@
-_ = require 'underscore'
+_    = require 'underscore'
+User = require '../../models/user'
 
 routes = (app) ->
 
 	_addUser = (username) ->
-		app.settings.userCount += 1
-		user = { id: app.settings.userCount, name: username }
-		app.settings.userList.push user
-		console.log app.settings.userList
+		user = User.getByUsername username
+		if user is null
+			user = new User name: username
+			user.save()
 		user
 
 	_removeUser = (userId) ->
@@ -19,11 +20,12 @@ routes = (app) ->
 			session: req.session
 
 	app.post '/sessions', (req, res) ->
-		req.session.currentUser = req.body.user
-		user = _addUser req.session.currentUser
+		username = req.body.user
+		user = _addUser username
+		req.session.currentUser = user
 		if socketIO = app.settings.socketIO
 			socketIO.sockets.emit "user:loggedIn", user
-		req.flash 'info', "You are now #{req.session.currentUser}"
+		req.flash 'info', "You are now #{username}"
 		res.redirect '/chat'
 		return
 

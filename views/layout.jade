@@ -16,7 +16,7 @@ html
 						- if (session.currentUser)
 							li
 								a
-									= session.currentUser
+									= session.currentUser.name
 							li
 								form(action='/logout', method='post')
 									a#logout(href="logout") Logout

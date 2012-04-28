@@ -13,8 +13,9 @@ class User
 
 	@getById: (id, callback) ->
 		redis.hget User.key(), id, (err, json) ->
-			return null if json is null
-			user = new User JSON.parse(json)
+			user = null
+			unless json is null
+				user = new User JSON.parse(json)
 			callback null, user
 
 	@all: (callback) ->

@@ -3,16 +3,18 @@ User = require '../../models/user'
 
 routes = (app) ->
 
-	_addUser = (username) ->
-		user = User.getByUsername username
-		if user is null
-			user = new User name: username
-			user.save()
-		user
+	_addUser = (req, username, next) ->
+		User.getByUsername username, (resp, user) ->
+			console.log user
+			if user is null
+				console.log "null"
+				user = new User name: username
+				user.save()
+			req.session.currentUser = user
+			next user
 
-	_removeUser = (userId) ->
-		userList = _.reject app.settings.userList, (u) -> u.id == userId
-		app.set 'userList', userList
+	_removeUser = (user) ->
+		# log user out
 
 	app.get '/login', (req, res) ->
 		res.render "#{__dirname}/views/login", 
@@ -21,12 +23,12 @@ routes = (app) ->
 
 	app.post '/sessions', (req, res) ->
 		username = req.body.user
-		user = _addUser username
-		req.session.currentUser = user
-		if socketIO = app.settings.socketIO
-			socketIO.sockets.emit "user:loggedIn", user
-		req.flash 'info', "You are now #{username}"
-		res.redirect '/chat'
+		_addUser req, username, (user) ->
+			if socketIO = app.settings.socketIO
+				socketIO.sockets.emit "user:loggedIn", user
+			req.flash 'info', "You are now #{username}"
+			res.redirect '/chat'
+			return
 		return
 
 	app.post '/logout', (req, res) ->

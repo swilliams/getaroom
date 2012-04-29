@@ -87,3 +87,9 @@ body {
 .row.user:hover {
   background: #f4f4f4;
 }
+
+/* line 83, ../sass/screen.scss */
+.row.message {
+  height: 24px;
+  line-height: 24px;
+}

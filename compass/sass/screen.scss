@@ -79,3 +79,8 @@ body {
 		// @include background-image(linear-gradient($light, $light2))
 	}
 }
+
+.row.message {
+	height: $single-line;
+	line-height: $single-line;
+}

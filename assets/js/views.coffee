@@ -54,10 +54,17 @@ jQuery ->
 			view = @createMessageView msg
 			@subviews.push view
 			@$el.append view.render().el
+			@scrollToBottom()
 
 		createMessageView: (msg) ->
 			view = new MessageView model:msg
 			view
+
+		scrollToBottom: ->
+			rowHeight = _.reduce @$el.children(), (memo, elem) -> 
+				memo + $(elem).height()
+			, 0
+			@$el.scrollTop rowHeight
 
 	class MessageView extends Backbone.View
 		template: Handlebars.compile $('#message_template').html() ? ''

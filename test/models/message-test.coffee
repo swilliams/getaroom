@@ -7,7 +7,7 @@ describe "Message", ->
 	describe "ctor", ->
 		message = null
 		before ->
-			message = new Message
+			message = new Message 100
 
 		it "sets the content by default", ->
 			assert.equal '', message.content

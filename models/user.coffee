@@ -55,6 +55,10 @@ class User
 		@active = false
 		@save callback
 
+	login: (callback) ->
+		@active = true
+		@save callback
+
 	destroy: (callback) ->
 		redis.hdel User.key(), @id, (err) ->
 			callback err if callback

@@ -6,12 +6,10 @@ routes = (app) ->
 	_addUser = (req, username, next) ->
 		User.getByUsername username, (err, user) ->
 			if user is null
-				console.log "new user"
 				user = new User name: username
-				user.save()
-			console.log user
-			req.session.currentUser = user
-			next user
+			user.login ->
+				req.session.currentUser = user
+				next user
 
 	app.get '/login', (req, res) ->
 		res.render "#{__dirname}/views/login", 

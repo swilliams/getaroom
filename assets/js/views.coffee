@@ -27,7 +27,7 @@ jQuery ->
 			@userView.collection.reset users
 
 		setupUserView: ->
-			@userView = new UserGridView collection: new app.Users
+			@userView = new UserGridView collection: app.Users
 			@userView.render()
 
 		setupChatEntry: ->
@@ -35,7 +35,7 @@ jQuery ->
 			@chatEntryView.render()
 
 		setupChatView: ->
-			@chatView = new ChatView collection: new app.Messages
+			@chatView = new ChatView collection: app.Messages
 			@chatView.render()
 
 	class ChatView extends Backbone.View
@@ -43,8 +43,8 @@ jQuery ->
 		subviews: null
 
 		initialize: ->
+			@collection.setupSocket()
 			@subviews = []
-			window.foo = @collection
 			@collection.bind 'add', @addMessage, @
 
 		render: ->
@@ -95,6 +95,7 @@ jQuery ->
 		el: '#users'
 
 		initialize: ->
+			@collection.setupSocket()
 			@collection.bind 'reset', @render, @
 			@collection.bind 'add', @addUser, @
 			@collection.bind 'remove', @render, @

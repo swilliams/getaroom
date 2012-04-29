@@ -2,7 +2,6 @@ class Users extends Backbone.Collection
 	type: app.User
 
 	initialize: ->
-		@setupSocket()
 
 	setupSocket: ->
 		socket = io.connect '/'
@@ -15,7 +14,6 @@ class Messages extends Backbone.Collection
 	type: app.Message
 
 	initialize: ->
-		@setupSocket()
 
 	setupSocket: ->
 		socket = io.connect '/'
@@ -23,5 +21,5 @@ class Messages extends Backbone.Collection
 			@add new app.Message(msg)
 
 @app = window.app ? {}
-@app.Messages = Messages
-@app.Users = Users
+@app.Messages = new Messages
+@app.Users = new Users

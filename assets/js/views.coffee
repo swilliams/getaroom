@@ -60,11 +60,13 @@ jQuery ->
 			view
 
 	class MessageView extends Backbone.View
+		template: Handlebars.compile $('#message_template').html() ? ''
+
 		initialize: ->
 
 		render: ->
-			template = "<div class=\"message\">#{@model.get('userId')}: #{@model.get('content')}</div>"
-			@$el.html template
+			window.Foo = @model
+			@$el.html @template(@model.toJSON())
 			@
 
 	class ChatEntryView extends Backbone.View

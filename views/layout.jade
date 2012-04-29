@@ -7,11 +7,22 @@ html
 
 		!= js('app')
 		script(src='/socket.io/socket.io.js')
+
 		script(type="text/template", id="user_row_template")
 			div.span2
 				span.username {{name}}
 			div.span1
 				span.idle Idle {{idle}}
+
+		script(type="text/template", id="message_template")
+			div.span2
+				span.username {{userName}}
+			div.span5
+				span.content {{content}}
+			div.span1
+				span.timestamp {{formattedTimestamp}}
+
+
 	body
 		div.navbar(class="navbar-fixed-top")
 			div.navbar-inner

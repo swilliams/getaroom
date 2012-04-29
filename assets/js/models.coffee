@@ -6,9 +6,12 @@ class Message extends Backbone.Model
 
 	initialize: ->
 
-	save: ->
-		super()
-
+	toJSON: ->
+		json = super()
+		d = new Date json.timestamp
+		json.formattedTimestamp = "#{d.getHours()}:#{d.getMinutes()}:#{d.getSeconds()}"
+		json
 
 @app = window.app ? {}
+@app.User = User
 @app.Message = Message

@@ -4,18 +4,18 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 /* Colors */
 /* Common */
-/* line 11, ../sass/screen.scss */
+/* line 12, ../sass/screen.scss */
 #main {
   position: relative;
   top: 50px;
 }
 
-/* line 16, ../sass/screen.scss */
+/* line 17, ../sass/screen.scss */
 .navbar .nav > li > form {
   padding: 10px 10px 0;
   margin-bottom: 0;
 }
-/* line 20, ../sass/screen.scss */
+/* line 21, ../sass/screen.scss */
 .navbar .nav > li > form > a {
   padding: 0;
   color: #999999;
@@ -24,39 +24,43 @@
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-/* line 28, ../sass/screen.scss */
+/* line 29, ../sass/screen.scss */
 .navbar .nav > li > form > a:hover {
   color: white;
 }
 
-/* line 35, ../sass/screen.scss */
+/* line 36, ../sass/screen.scss */
 #chat {
   height: 500px;
 }
 
-/* line 39, ../sass/screen.scss */
+/* line 40, ../sass/screen.scss */
 #users {
-  background: #f5f9fb;
   height: 500px;
   overflow: auto;
 }
 
-/* line 48, ../sass/screen.scss */
+/* line 49, ../sass/screen.scss */
 .row.user {
   height: 24px;
   line-height: 24px;
   cursor: pointer;
 }
-/* line 53, ../sass/screen.scss */
+/* line 54, ../sass/screen.scss */
 .row.user .username {
   padding-left: 10px;
 }
-/* line 57, ../sass/screen.scss */
+/* line 58, ../sass/screen.scss */
 .row.user .idle {
   font-style: italic;
   color: #aaaaaa;
 }
-/* line 62, ../sass/screen.scss */
+/* line 63, ../sass/screen.scss */
 .row.user:hover {
-  background: #aacde0;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #aacde0), color-stop(100%, #85b7d2));
+  background-image: -webkit-linear-gradient(#aacde0, #85b7d2);
+  background-image: -moz-linear-gradient(#aacde0, #85b7d2);
+  background-image: -o-linear-gradient(#aacde0, #85b7d2);
+  background-image: -ms-linear-gradient(#aacde0, #85b7d2);
+  background-image: linear-gradient(#aacde0, #85b7d2);
 }

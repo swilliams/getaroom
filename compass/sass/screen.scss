@@ -4,6 +4,7 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "globals.scss";
+@import "compass";
 
 $navlink: #999;
 $navlink-hover: #fff;
@@ -37,7 +38,7 @@ $navlink-hover: #fff;
 }
 
 #users {
-	background: $lightest;
+	// background: $lightest;
 	height: 500px;
 	overflow: auto;
 }
@@ -60,6 +61,7 @@ $navlink-hover: #fff;
 	}
 
 	&:hover {
-		background: $light;
+		// background: $light;
+		@include background-image(linear-gradient($light, $light2))
 	}
 }

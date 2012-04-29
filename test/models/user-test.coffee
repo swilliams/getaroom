@@ -25,3 +25,12 @@ describe "User", ->
 			user.name = "test one"
 			user.generateId()
 			assert.equal user.id, 'test-one'
+
+	describe "#setDefaults", ->
+		user = null
+		before ->
+			user = new User { name: 'swilliams' }
+
+		it "sets the default active status", ->
+			assert.equal true, user.active?
+			assert.equal true, user.active

@@ -26,8 +26,15 @@ class User
 				users.push user
 			callback null, users
 
+	defaults:
+		active: true
+
 	constructor: (attributes) ->
+		@setDefaults()
 		@[key] = value for key,value of attributes
+
+	setDefaults: ->
+		@[key] = value for key,value of @defaults
 
 	generateId: ->
 		if not @id and @name
@@ -37,6 +44,10 @@ class User
 		@generateId()
 		redis.hset User.key(), @id, JSON.stringify(@), (err, resp) =>
 			if callback? then callback null, @
+
+	logout: (callback) ->
+		@active = false
+
 
 	destroy: (callback) ->
 		redis.hdel User.key(), @id, (err) ->

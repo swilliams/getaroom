@@ -7,6 +7,7 @@
 @import "compass";
 @import "compass/css3/border-radius";
 @import "compass/css3/box-shadow";
+@import "compass/css3/text-shadow";
 
 $navlink: #999;
 $navlink-hover: #fff;
@@ -59,6 +60,9 @@ body {
 	height: $single-line;
 	line-height: $single-line;
 	cursor: pointer;
+	color: $light-text;
+	// text-shadow: 0px 1px 0px rgba(255,255,255,0.75);
+	@include text-shadow($white-transparent 0px 1px 0px);
 	@include row-border();
 
 	.username {

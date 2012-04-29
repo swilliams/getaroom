@@ -5,23 +5,23 @@
 /* Colors */
 /* Common */
 /* Mixins */
-/* line 14, ../sass/screen.scss */
+/* line 15, ../sass/screen.scss */
 body {
   background: url("/images/ricepaper2.png") top left repeat;
 }
 
-/* line 18, ../sass/screen.scss */
+/* line 19, ../sass/screen.scss */
 #main {
   position: relative;
   top: 50px;
 }
 
-/* line 23, ../sass/screen.scss */
+/* line 24, ../sass/screen.scss */
 .navbar .nav > li > form {
   padding: 10px 10px 0;
   margin-bottom: 0;
 }
-/* line 27, ../sass/screen.scss */
+/* line 28, ../sass/screen.scss */
 .navbar .nav > li > form > a {
   padding: 0;
   color: #999999;
@@ -30,17 +30,17 @@ body {
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-/* line 35, ../sass/screen.scss */
+/* line 36, ../sass/screen.scss */
 .navbar .nav > li > form > a:hover {
   color: white;
 }
 
-/* line 42, ../sass/screen.scss */
+/* line 43, ../sass/screen.scss */
 #chat {
   height: 500px;
 }
 
-/* line 46, ../sass/screen.scss */
+/* line 47, ../sass/screen.scss */
 #users {
   background: rgba(233, 233, 233, 0.7);
   height: 500px;
@@ -56,32 +56,34 @@ body {
   box-shadow: 0px 0px 5px #333333;
 }
 
-/* line 58, ../sass/screen.scss */
+/* line 59, ../sass/screen.scss */
 .row.user {
   height: 24px;
   line-height: 24px;
   cursor: pointer;
+  color: #666666;
+  text-shadow: rgba(255, 255, 255, 0.75) 0px 1px 0px;
   border-bottom: 1px solid #cccccc;
   border-top: 1px solid #f4f4f4;
 }
-/* line 22, /Users/swilliams/code/getaroom/compass/sass/globals.scss */
+/* line 24, ../sass/globals.scss */
 .row.user:first-child {
   border-top: 0;
 }
-/* line 26, /Users/swilliams/code/getaroom/compass/sass/globals.scss */
+/* line 28, ../sass/globals.scss */
 .row.user:last-child {
   border-bottom: 0;
 }
-/* line 64, ../sass/screen.scss */
+/* line 68, ../sass/screen.scss */
 .row.user .username {
   padding-left: 10px;
 }
-/* line 68, ../sass/screen.scss */
+/* line 72, ../sass/screen.scss */
 .row.user .idle {
   font-style: italic;
   color: #aaaaaa;
 }
-/* line 73, ../sass/screen.scss */
+/* line 77, ../sass/screen.scss */
 .row.user:hover {
   background: #f4f4f4;
 }

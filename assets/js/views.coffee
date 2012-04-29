@@ -47,7 +47,6 @@ jQuery ->
 			window.foo = @collection
 			@collection.bind 'add', @addMessage, @
 
-
 		render: ->
 			@
 
@@ -64,7 +63,7 @@ jQuery ->
 		initialize: ->
 
 		render: ->
-			template = "<div class=\"message\">#{@model.get('user')}: #{@model.get('content')}</div>"
+			template = "<div class=\"message\">#{@model.get('userId')}: #{@model.get('content')}</div>"
 			@$el.html template
 			@
 
@@ -81,9 +80,13 @@ jQuery ->
 		getText: ->
 			@$('input[name=chat]').val()
 
+		clearText: ->
+			@$('input[name=chat]').val ''
+
 		addChat: (ev) ->
 			ev.preventDefault()
 			newMessage = new app.Message content: @getText()
+			@clearText()
 			newMessage.save()
 
 	class UserGridView extends Backbone.View

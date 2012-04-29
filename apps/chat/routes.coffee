@@ -1,4 +1,5 @@
 User = require "../../models/user"
+Message = require "../../models/message"
 
 routes = (app) ->
 	app.all '/chat', (req, res, next) ->
@@ -9,7 +10,6 @@ routes = (app) ->
 		next()
 
 	app.get '/chat', (req, res) ->
-		# get the list of users
 		User.active (err, users) ->
 			res.render "#{__dirname}/views/main",
 				title: 'OMG Chat!'
@@ -17,11 +17,10 @@ routes = (app) ->
 				users: users
 
 	app.post '/chat', (req, res) ->
-		text = req.body.content
+		msg = new Message req.session.currentUser.id, content: req.body.content
 		if socketIO = app.settings.socketIO
-			socketIO.sockets.emit "msg:received", { user: req.session.currentUser, content: text }
-		res.send text
-
+			socketIO.sockets.emit "msg:received", msg
+		res.send ''
 
 
 module.exports = routes

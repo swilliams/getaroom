@@ -1,7 +1,8 @@
 redis = require('redis').createClient()
 _	  = require('underscore')
+BaseModel = require('./base')
 
-class User
+class User extends BaseModel
 	@key: ->
 		"User:#{process.env.NODE_ENV}"
 
@@ -34,13 +35,6 @@ class User
 
 	defaults:
 		active: true
-
-	constructor: (attributes) ->
-		@setDefaults()
-		@[key] = value for key,value of attributes
-
-	setDefaults: ->
-		@[key] = value for key,value of @defaults
 
 	generateId: ->
 		if not @id and @name

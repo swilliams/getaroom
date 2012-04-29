@@ -5,9 +5,15 @@
 
 @import "globals.scss";
 @import "compass";
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
 
 $navlink: #999;
 $navlink-hover: #fff;
+
+body {
+	background: url('/images/ricepaper2.png') top left repeat;
+}
 
 #main {
 	position: relative;
@@ -38,9 +44,12 @@ $navlink-hover: #fff;
 }
 
 #users {
-	// background: $lightest;
+	background: $lightest-transparent;
 	height: 500px;
 	overflow: auto;
+	padding-top: 5px;
+	@include border-radius(4px);
+	@include box-shadow();
 }
 
 #chat_entry {
@@ -50,6 +59,8 @@ $navlink-hover: #fff;
 	height: $single-line;
 	line-height: $single-line;
 	cursor: pointer;
+	border-bottom: 1px solid $border;
+	border-top: 1px solid $border-light;
 
 	.username {
 		padding-left: 10px;
@@ -60,8 +71,12 @@ $navlink-hover: #fff;
 		color: $gray-text;
 	}
 
+	&:first-child {
+		border-top: 0;
+	}
+
 	&:hover {
-		// background: $light;
-		@include background-image(linear-gradient($light, $light2))
+		background: $border-light;
+		// @include background-image(linear-gradient($light, $light2))
 	}
 }

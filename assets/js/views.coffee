@@ -92,6 +92,7 @@ jQuery ->
 		initialize: ->
 			@collection.bind 'reset', @render, @
 			@collection.bind 'add', @addUser, @
+			@collection.bind 'remove', @render, @
 
 		render: ->
 			@$el.empty()

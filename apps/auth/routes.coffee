@@ -33,7 +33,7 @@ routes = (app) ->
 		console.log user
 		user.logout ->
 			if socketIO = app.settings.socketIO
-				socketIO.sockets.emit "user:loggedOut", { id: user.Id }	
+				socketIO.sockets.emit "user:loggedOut", user
 			req.session.regenerate (err) ->
 				req.flash 'info', 'You have been logged out'
 				res.redirect '/login'

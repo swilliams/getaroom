@@ -43,6 +43,10 @@ assertTypeOf = (actual, expected, message, caller) ->
   if (typeOf(actual) isnt expected)
     assert.fail(actual, expected, message || "expected #{actual} to be of type #{expected}", "typeOf", caller)
 
+assert.notNull = (actual, message) ->
+  if actual is undefined or actual is null
+    assert.fail actual, null, message || "expected value to not be null", "notNull"
+
 # A better `typeof`
 typeOf = (value) ->
   s = typeof(value)

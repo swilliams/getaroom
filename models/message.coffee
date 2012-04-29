@@ -14,5 +14,20 @@ class Message extends BaseModel
 		super attributes
 		unless @userId? then throw "A Message needs a user id" 
 
+	generateId: (callback) ->
+		unless @id? 
+			key = "ids:Message:#{process.env.NODE_ENV}"
+			redis.incr key, (err, id) =>
+				@id = "message:#{id}"
+				callback()
+		else
+			callback()
+
+
+	save: (callback) ->
+		@generateId =>
+			redis.hset Message.key(), @id, JSON.stringify(@), (err, resp) ->
+				if callback? then callback err, @
+
 
 module.exports = Message

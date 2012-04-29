@@ -10,5 +10,9 @@ class Message extends BaseModel
 		content: ''
 		timestamp: new Date
 
+	constructor: (@userId, attributes) ->
+		super attributes
+		unless @userId? then throw "A Message needs a user id" 
+
 
 module.exports = Message

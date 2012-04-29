@@ -10,7 +10,7 @@ routes = (app) ->
 
 	app.get '/chat', (req, res) ->
 		# get the list of users
-		User.all (err, users) ->
+		User.active (err, users) ->
 			res.render "#{__dirname}/views/main",
 				title: 'OMG Chat!'
 				session: req.session

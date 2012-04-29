@@ -13,9 +13,6 @@ routes = (app) ->
 			req.session.currentUser = user
 			next user
 
-	_removeUser = (user) ->
-		# log user out
-
 	app.get '/login', (req, res) ->
 		res.render "#{__dirname}/views/login", 
 			title: 'Login'
@@ -32,12 +29,13 @@ routes = (app) ->
 		return
 
 	app.post '/logout', (req, res) ->
-		userId = req.session.currentUser.id
-		if socketIO = app.settings.socketIO
-			socketIO.sockets.emit "user:loggedOut", { id: userId }	
-			_removeUser userId
-		req.session.regenerate (err) ->
-			req.flash 'info', 'You have been logged out'
-			res.redirect '/login'
+		user = new User req.session.currentUser
+		console.log user
+		user.logout ->
+			if socketIO = app.settings.socketIO
+				socketIO.sockets.emit "user:loggedOut", { id: user.Id }	
+			req.session.regenerate (err) ->
+				req.flash 'info', 'You have been logged out'
+				res.redirect '/login'
 
 module.exports = routes

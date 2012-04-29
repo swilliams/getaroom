@@ -1,4 +1,5 @@
 redis = require('redis').createClient()
+_	  = require('underscore')
 
 class User
 	@key: ->
@@ -26,6 +27,11 @@ class User
 				users.push user
 			callback null, users
 
+	@active: (callback) ->
+		User.all (err, users) ->
+			activeUsers = _.filter users, (u) -> u.active
+			callback null, activeUsers
+
 	defaults:
 		active: true
 
@@ -47,7 +53,7 @@ class User
 
 	logout: (callback) ->
 		@active = false
-
+		@save callback
 
 	destroy: (callback) ->
 		redis.hdel User.key(), @id, (err) ->

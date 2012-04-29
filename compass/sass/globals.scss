@@ -12,3 +12,18 @@ $lightest-transparent: rgba(233, 233, 233, 0.7);
 
 /* Common */
 $single-line: 24px;
+
+
+/* Mixins */
+@mixin row-border {
+	border-bottom: 1px solid $border;
+	border-top: 1px solid $border-light;
+
+	&:first-child {
+		border-top: 0;
+	}
+
+	&:last-child {
+		border-bottom: 0;
+	}
+}

@@ -4,6 +4,7 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 /* Colors */
 /* Common */
+/* Mixins */
 /* line 14, ../sass/screen.scss */
 body {
   background: url("/images/ricepaper2.png") top left repeat;
@@ -63,20 +64,24 @@ body {
   border-bottom: 1px solid #cccccc;
   border-top: 1px solid #f4f4f4;
 }
-/* line 65, ../sass/screen.scss */
+/* line 22, /Users/swilliams/code/getaroom/compass/sass/globals.scss */
+.row.user:first-child {
+  border-top: 0;
+}
+/* line 26, /Users/swilliams/code/getaroom/compass/sass/globals.scss */
+.row.user:last-child {
+  border-bottom: 0;
+}
+/* line 64, ../sass/screen.scss */
 .row.user .username {
   padding-left: 10px;
 }
-/* line 69, ../sass/screen.scss */
+/* line 68, ../sass/screen.scss */
 .row.user .idle {
   font-style: italic;
   color: #aaaaaa;
 }
-/* line 74, ../sass/screen.scss */
-.row.user:first-child {
-  border-top: 0;
-}
-/* line 78, ../sass/screen.scss */
+/* line 73, ../sass/screen.scss */
 .row.user:hover {
   background: #f4f4f4;
 }

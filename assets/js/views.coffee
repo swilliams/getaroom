@@ -103,12 +103,13 @@ jQuery ->
 			@$el.append view.render().el
 
 	class UserView extends Backbone.View
-		className: 'user'
+		className: 'row user'
+		template: Handlebars.compile $('#user_row_template').html()
 
 		initialize: ->
 
 		render: ->
-			@$el.html @model.get('name')
+			@$el.html @template(@model.toJSON())
 			@
 
 

@@ -4,6 +4,7 @@
 #= require 'vendor/underscore'
 #= require 'vendor/bootstrap'
 #= require 'vendor/backbone'
+#= require 'vendor/handlebars-1.0.0.beta.6.js'
 #= require 'models'
 #= require 'collections'
 #= require 'views'

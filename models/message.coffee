@@ -26,7 +26,7 @@ class Message extends BaseModel
 
 	save: (callback) ->
 		@generateId =>
-			redis.hset Message.key(), @id, JSON.stringify(@), (err, resp) ->
+			redis.hset Message.key(), @id, JSON.stringify(@), (err, resp) =>
 				if callback? then callback err, @
 
 

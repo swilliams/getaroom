@@ -10,7 +10,6 @@ class Message extends Backbone.Model
 		app.Users.get @get('userId')
 
 	formatted: ->
-		console.log @
 		json = @toJSON()
 		d = new Date json.timestamp
 		json.formattedTimestamp = "#{d.getHours()}:#{d.getMinutes()}:#{d.getSeconds()}"

@@ -51,6 +51,7 @@ jQuery ->
 			@
 
 		addMessage: (msg) ->
+			window.Foo = msg
 			view = @createMessageView msg
 			@subviews.push view
 			@$el.append view.render().el
@@ -61,12 +62,12 @@ jQuery ->
 
 	class MessageView extends Backbone.View
 		template: Handlebars.compile $('#message_template').html() ? ''
+		className: 'row'
 
 		initialize: ->
 
 		render: ->
-			window.Foo = @model
-			@$el.html @template(@model.toJSON())
+			@$el.html @template(@model.formatted())
 			@
 
 	class ChatEntryView extends Backbone.View

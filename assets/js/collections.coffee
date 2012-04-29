@@ -18,6 +18,7 @@ class Messages extends Backbone.Collection
 	setupSocket: ->
 		socket = io.connect '/'
 		socket.on "msg:received", (msg) =>
+			console.log msg
 			@add new app.Message(msg)
 
 @app = window.app ? {}

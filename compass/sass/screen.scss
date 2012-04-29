@@ -3,6 +3,8 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
+@import "globals.scss";
+
 $navlink: #999;
 $navlink-hover: #fff;
 
@@ -31,13 +33,33 @@ $navlink-hover: #fff;
 }
 
 #chat {
-	background: #aaa;
 	height: 500px;
 }
 
 #users {
-	background: #aaa;
+	background: $lightest;
+	height: 500px;
+	overflow: auto;
 }
 
 #chat_entry {
+}
+
+.row.user {
+	height: $single-line;
+	line-height: $single-line;
+	cursor: pointer;
+
+	.username {
+		padding-left: 10px;
+	}
+
+	.idle {
+		font-style: italic;
+		color: $gray-text;
+	}
+
+	&:hover {
+		background: $light;
+	}
 }

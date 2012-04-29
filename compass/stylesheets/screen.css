@@ -2,18 +2,20 @@
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-/* line 9, ../sass/screen.scss */
+/* Colors */
+/* Common */
+/* line 11, ../sass/screen.scss */
 #main {
   position: relative;
   top: 50px;
 }
 
-/* line 14, ../sass/screen.scss */
+/* line 16, ../sass/screen.scss */
 .navbar .nav > li > form {
   padding: 10px 10px 0;
   margin-bottom: 0;
 }
-/* line 18, ../sass/screen.scss */
+/* line 20, ../sass/screen.scss */
 .navbar .nav > li > form > a {
   padding: 0;
   color: #999999;
@@ -22,18 +24,39 @@
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-/* line 26, ../sass/screen.scss */
+/* line 28, ../sass/screen.scss */
 .navbar .nav > li > form > a:hover {
   color: white;
 }
 
-/* line 33, ../sass/screen.scss */
+/* line 35, ../sass/screen.scss */
 #chat {
-  background: #aaa;
   height: 500px;
 }
 
-/* line 38, ../sass/screen.scss */
+/* line 39, ../sass/screen.scss */
 #users {
-  background: #aaa;
+  background: #f5f9fb;
+  height: 500px;
+  overflow: auto;
+}
+
+/* line 48, ../sass/screen.scss */
+.row.user {
+  height: 24px;
+  line-height: 24px;
+  cursor: pointer;
+}
+/* line 53, ../sass/screen.scss */
+.row.user .username {
+  padding-left: 10px;
+}
+/* line 57, ../sass/screen.scss */
+.row.user .idle {
+  font-style: italic;
+  color: #aaaaaa;
+}
+/* line 62, ../sass/screen.scss */
+.row.user:hover {
+  background: #aacde0;
 }

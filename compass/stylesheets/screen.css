@@ -3,6 +3,7 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 /* Colors */
+/* Type */
 /* Common */
 /* Mixins */
 /* line 15, ../sass/screen.scss */
@@ -38,9 +39,10 @@ body {
 /* line 43, ../sass/screen.scss */
 #chat {
   height: 500px;
+  overflow: auto;
 }
 
-/* line 47, ../sass/screen.scss */
+/* line 48, ../sass/screen.scss */
 #users {
   background: rgba(233, 233, 233, 0.7);
   height: 500px;
@@ -56,7 +58,7 @@ body {
   box-shadow: 0px 0px 5px #333333;
 }
 
-/* line 59, ../sass/screen.scss */
+/* line 60, ../sass/screen.scss */
 .row.user {
   height: 24px;
   line-height: 24px;
@@ -66,30 +68,58 @@ body {
   border-bottom: 1px solid #cccccc;
   border-top: 1px solid #f4f4f4;
 }
-/* line 24, ../sass/globals.scss */
+/* line 27, ../sass/globals.scss */
 .row.user:first-child {
   border-top: 0;
 }
-/* line 28, ../sass/globals.scss */
+/* line 31, ../sass/globals.scss */
 .row.user:last-child {
   border-bottom: 0;
 }
-/* line 68, ../sass/screen.scss */
+/* line 69, ../sass/screen.scss */
 .row.user .username {
   padding-left: 10px;
 }
-/* line 72, ../sass/screen.scss */
+/* line 73, ../sass/screen.scss */
 .row.user .idle {
   font-style: italic;
   color: #aaaaaa;
 }
-/* line 77, ../sass/screen.scss */
+/* line 78, ../sass/screen.scss */
 .row.user:hover {
   background: #f4f4f4;
 }
 
-/* line 83, ../sass/screen.scss */
+/* line 84, ../sass/screen.scss */
 .row.message {
-  height: 24px;
+  min-height: 24px;
   line-height: 24px;
+  border-bottom: 1px solid #dfdfdf;
+}
+/* line 89, ../sass/screen.scss */
+.row.message.self_message {
+  background: #85b7d2;
+}
+/* line 93, ../sass/screen.scss */
+.row.message.mentioned {
+  background: #aacde0;
+}
+/* line 97, ../sass/screen.scss */
+.row.message .timestamp {
+  position: relative;
+  left: -15px;
+  color: #aaaaaa;
+  font-family: Consolas, Courier New, Courier, monospaced;
+}
+/* line 104, ../sass/screen.scss */
+.row.message .span1 {
+  width: 45px;
+}
+/* line 108, ../sass/screen.scss */
+.row.message .span5 {
+  width: 368px;
+}
+/* line 112, ../sass/screen.scss */
+.row.message .username {
+  color: #666666;
 }

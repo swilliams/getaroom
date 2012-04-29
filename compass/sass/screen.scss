@@ -42,6 +42,7 @@ body {
 
 #chat {
 	height: 500px;
+	overflow: auto;
 }
 
 #users {
@@ -81,6 +82,34 @@ body {
 }
 
 .row.message {
-	height: $single-line;
+	min-height: $single-line;
 	line-height: $single-line;
+	border-bottom: 1px solid $border2;
+
+	&.self_message {
+		background: $light2;
+	}	
+
+	&.mentioned {
+		background: $light;
+	}
+
+	.timestamp {
+		position: relative;
+		left: -15px;
+		color: $gray-text;
+		font-family: $mono;
+	}
+
+	.span1 {
+		width: 45px;
+	}
+
+	.span5 {
+		width: 368px;
+	}
+
+	.username {
+		color: $light-text;
+	}
 }

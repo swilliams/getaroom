@@ -8,7 +8,7 @@ routes = (app) ->
 			if user is null
 				user = new User name: username
 			user.login ->
-				req.session.currentUser = user
+				req.session.currentUser = user.toClientObject()
 				next user
 
 	app.get '/login', (req, res) ->

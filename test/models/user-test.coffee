@@ -51,3 +51,12 @@ describe "User", ->
 			user.ips = [ip]
 			user.addIp ip
 			assert.equal 1, user.ips.length
+
+	describe "#toClientObject", ->
+		user = null
+		before ->
+			user = new User { name: 'swilliams', active: 'adsfa' }
+
+		it "only has the explicitly defined properties", ->
+			clientObj = user.toClientObject()
+			assert.isUndefined clientObj.active

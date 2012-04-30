@@ -45,6 +45,10 @@ class User extends BaseModel
 		if not @id and @name
 			@id = User.generateId @name
 
+	toClientObject: ->
+		keys = ['name', 'isMod', 'lastLogin', 'id']
+		_.pick @, keys
+
 	save: (callback) ->
 		@generateId()
 		redis.hset User.key(), @id, JSON.stringify(@), (err, resp) =>

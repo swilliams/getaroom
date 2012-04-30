@@ -47,6 +47,14 @@ assert.notNull = (actual, message) ->
   if actual is undefined or actual is null
     assert.fail actual, null, message || "expected value to not be null", "notNull"
 
+assert.notUndefined = (actual, message) ->
+  if actual is undefined
+    assert.fail actual, null, message || "expected value to not be undefined", "notUndefined"
+
+assert.isUndefined = (actual, message) ->
+  unless actual is undefined
+    assert.fail actual, null, message || "expected value to not be undefined", "notUndefined"
+
 # A better `typeof`
 typeOf = (value) ->
   s = typeof(value)

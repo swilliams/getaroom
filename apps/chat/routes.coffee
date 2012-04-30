@@ -1,5 +1,6 @@
-User = require "../../models/user"
+User 	= require "../../models/user"
 Message = require "../../models/message"
+_ 		= require "underscore"
 
 routes = (app) ->
 	app.all '/chat', (req, res, next) ->
@@ -10,12 +11,14 @@ routes = (app) ->
 		next()
 
 	app.get '/chat', (req, res) ->
+		currentUser = new User req.session.currentUser
 		User.active (err, users) ->
+			clientObjects = _.map users, (u) -> u.toClientObject()
 			res.render "#{__dirname}/views/main",
 				title: 'OMG Chat!'
 				session: req.session
-				users: users
-				currentUser: req.session.currentUser
+				users: clientObjects
+				currentUser: currentUser.toClientObject()
 
 	app.post '/chat', (req, res) ->
 		msg = new Message req.session.currentUser.id, content: req.body.content

@@ -35,6 +35,9 @@ class User extends BaseModel
 
 	defaults:
 		active: true
+		isMod: false
+		ips: []
+		isMuted: false
 
 	generateId: ->
 		if not @id and @name
@@ -52,6 +55,11 @@ class User extends BaseModel
 	login: (callback) ->
 		@active = true
 		@save callback
+
+	addIp: (address) ->
+		unless _.find(@ips, (ip) -> ip == address)
+			@ips.push address
+			@save()
 
 	destroy: (callback) ->
 		redis.hdel User.key(), @id, (err) ->

@@ -34,3 +34,20 @@ describe "User", ->
 		it "sets the default active status", ->
 			assert.equal true, user.active?
 			assert.equal true, user.active
+
+	describe "#addIp", ->
+		user = null
+		before ->
+			user = new User { name: 'swilliams', ips: [] }
+			user.save = -> true
+
+		it "adds the ip if doesnt already exist", ->
+			ip = "192.168.1.1"
+			user.addIp ip
+			assert.equal ip, user.ips[0]
+
+		it "doesn't add an ip if it already exists", ->
+			ip = "192.168.1.1"
+			user.ips = [ip]
+			user.addIp ip
+			assert.equal 1, user.ips.length

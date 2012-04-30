@@ -19,6 +19,8 @@ routes = (app) ->
 	app.post '/sessions', (req, res) ->
 		username = req.body.user
 		_addUser req, username, (user) ->
+			ip = req.connection.remoteAddress
+			user.addIp ip
 			if socketIO = app.settings.socketIO
 				socketIO.sockets.emit "user:loggedIn", user
 			req.flash 'info', "You are now #{username}"
@@ -28,7 +30,6 @@ routes = (app) ->
 
 	app.post '/logout', (req, res) ->
 		user = new User req.session.currentUser
-		console.log user
 		user.logout ->
 			if socketIO = app.settings.socketIO
 				socketIO.sockets.emit "user:loggedOut", user

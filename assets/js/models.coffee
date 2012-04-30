@@ -12,7 +12,6 @@ class Message extends Backbone.Model
 	isMention: ->
 		userName = window.app.currentUser.name
 		result = @get('content').indexOf userName
-		console.log result
 		result >= 0
 
 	isUsersMessage: ->
@@ -22,6 +21,7 @@ class Message extends Backbone.Model
 		json = @toJSON()
 		d = new Date json.timestamp
 		json.formattedTimestamp = "#{d.getHours()}:#{d.getMinutes()}:#{d.getSeconds()}"
+		json.fullTimestamp = ""
 		user = @_getUserById()
 		json.userName = user.get 'name'
 		json

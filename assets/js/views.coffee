@@ -85,6 +85,7 @@ jQuery ->
 
 		events:
 			'submit form' : 'addChat'
+			'keypress input[name=chat]' : 'keyPressed'
 
 		render: ->
 			@
@@ -95,12 +96,24 @@ jQuery ->
 		getText: ->
 			@$('input[name=chat]').val()
 
+		setText: (text) ->
+			@$('input[name=chat]').val text
+
 		clearText: ->
 			@$('input[name=chat]').val ''
 
+		displayLastMessage: ->
+			@setText @lastMessageEntered
+
+		keyPressed: (ev) ->
+			up = 38
+			tab = 9
+			if ev.keyCode == up then @displayLastMessage()
+
 		addChat: (ev) ->
 			ev.preventDefault()
-			newMessage = new app.Message content: @getText()
+			@lastMessageEntered = @getText()
+			newMessage = new app.Message content: @lastMessageEntered
 			@clearText()
 			newMessage.save()
 

@@ -38,6 +38,8 @@ class User extends BaseModel
 		isMod: false
 		ips: []
 		isMuted: false
+		mutedSince: null
+		lastLogin: null
 
 	generateId: ->
 		if not @id and @name
@@ -54,12 +56,31 @@ class User extends BaseModel
 
 	login: (callback) ->
 		@active = true
+		@lastLogin = new Date
 		@save callback
 
 	addIp: (address) ->
 		unless _.find(@ips, (ip) -> ip == address)
 			@ips.push address
 			@save()
+
+	makeMod: ->
+		@isMod = true
+		@save()
+
+	deMod: ->
+		@isMod = false
+		@save()
+
+	mute: ->
+		@isMuted = true
+		@mutedSince = new Date
+		@save()
+
+	unMute: ->
+		@isMuted = false
+		@mutedSince = null
+		@save()
 
 	destroy: (callback) ->
 		redis.hdel User.key(), @id, (err) ->

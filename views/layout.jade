@@ -12,7 +12,7 @@ html
 			div.span2
 				span.username {{name}}
 			div.span1
-				span.idle Idle {{idle}}
+				span.idle {{idle}}
 
 		script(type="text/template", id="message_template")
 			div.span2
@@ -39,8 +39,6 @@ html
 						- else
 							li
 								a(href="/login") Login
-
-
 
 		div.container#main
 			- var flashTypes = ['info', 'error']

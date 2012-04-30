@@ -18,6 +18,7 @@ app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.set('port', 3000);
+  app.set('defaultModList', ['swilliams'])
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser());
@@ -44,6 +45,7 @@ app.configure('production', function(){
 
 // Helpers
 require('./apps/helpers')(app);
+require('./apps/modlist')(app);
 
 // Routes
 

@@ -10,6 +10,10 @@ div.row
 			input.chat.span7(type='text', name='chat')
 			input.btn.btn-primary#sayit(type='submit', value='Say It')
 
+if currentUser.isMod
+	div.row
+		h2 You are a mod!
+
 script
 	$(function() {
 		var currentUsers = !{JSON.stringify(users)};

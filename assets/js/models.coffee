@@ -9,6 +9,15 @@ class Message extends Backbone.Model
 	_getUserById: ->
 		app.Users.get @get('userId')
 
+	isMention: ->
+		userName = window.app.currentUser.name
+		result = @get('content').indexOf userName
+		console.log result
+		result >= 0
+
+	isUsersMessage: ->
+		window.app.currentUser.id == @get('userId')
+
 	formatted: ->
 		json = @toJSON()
 		d = new Date json.timestamp

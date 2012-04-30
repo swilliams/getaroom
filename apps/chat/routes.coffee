@@ -15,6 +15,7 @@ routes = (app) ->
 				title: 'OMG Chat!'
 				session: req.session
 				users: users
+				currentUser: req.session.currentUser
 
 	app.post '/chat', (req, res) ->
 		msg = new Message req.session.currentUser.id, content: req.body.content

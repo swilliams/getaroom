@@ -2,8 +2,7 @@ h1 OMG CHaT!
 
 div.row
 	div.span8#chat
-	div.span3.container
-		h3#users_header Chatters
+	div.span3.container#users_container
 		#users
 div.row
 	div.span12#chat_entry
@@ -15,5 +14,7 @@ script
 	$(function() {
 		var currentUsers = !{JSON.stringify(users)};
 		window.app.chatView.preloadUsers(currentUsers);
+
+		window.app.currentUser = !{JSON.stringify(currentUser)}
 	});
 

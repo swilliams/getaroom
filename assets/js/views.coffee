@@ -33,6 +33,7 @@ jQuery ->
 		setupChatEntry: ->
 			@chatEntryView = new ChatEntryView
 			@chatEntryView.render()
+			@chatEntryView.focus()
 
 		setupChatView: ->
 			@chatView = new ChatView collection: app.Messages
@@ -74,6 +75,8 @@ jQuery ->
 
 		render: ->
 			@$el.html @template(@model.formatted())
+			if @model.isMention() then @$el.addClass 'mentioned'
+			if @model.isUsersMessage() then @$el.addClass 'self_message'
 			@
 
 	class ChatEntryView extends Backbone.View
@@ -85,6 +88,9 @@ jQuery ->
 
 		render: ->
 			@
+
+		focus: ->
+			@$('input[name=chat]').focus()
 
 		getText: ->
 			@$('input[name=chat]').val()

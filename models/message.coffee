@@ -8,11 +8,14 @@ class Message extends BaseModel
 
 	defaults:
 		content: ''
-		timestamp: new Date
 
 	constructor: (@userId, attributes) ->
 		super attributes
 		unless @userId? then throw "A Message needs a user id" 
+
+	setDefaults: ->
+		super()
+		@timestamp = new Date() unless @timestamp?
 
 	generateId: (callback) ->
 		unless @id? 

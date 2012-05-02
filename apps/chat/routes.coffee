@@ -22,8 +22,11 @@ routes = (app) ->
 
 	app.post '/chat', (req, res) ->
 		msg = new Message req.session.currentUser.id, content: req.body.content
+		user = new User req.session.currentUser
 		if socketIO = app.settings.socketIO
-			socketIO.sockets.emit "msg:received", msg
+			console.log user
+			unless user.isMuted
+				socketIO.sockets.emit "msg:received", msg
 		res.send ''
 
 

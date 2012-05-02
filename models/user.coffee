@@ -78,12 +78,20 @@ class User extends BaseModel
 	mute: ->
 		@isMuted = true
 		@mutedSince = new Date
-		@save()
 
 	unMute: ->
 		@isMuted = false
 		@mutedSince = null
-		@save()
+
+	update: (attributes, whosAsking, callback) ->
+		if whosAsking.id == @id
+			@name = attributes.name if attributes.name?
+
+		if whosAsking.isMod
+			if attributes.isMuted then @mute() else @unMute()
+
+		@save callback
+
 
 	destroy: (callback) ->
 		redis.hdel User.key(), @id, (err) ->

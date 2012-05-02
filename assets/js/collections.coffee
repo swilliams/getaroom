@@ -1,5 +1,5 @@
 class Users extends Backbone.Collection
-	type: app.User
+	model: app.User
 
 	initialize: ->
 
@@ -11,7 +11,7 @@ class Users extends Backbone.Collection
 			@remove user.id
 
 class Messages extends Backbone.Collection
-	type: app.Message
+	model: app.Message
 
 	initialize: ->
 

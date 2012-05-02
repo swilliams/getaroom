@@ -29,5 +29,13 @@ routes = (app) ->
 				socketIO.sockets.emit "msg:received", msg
 		res.send ''
 
+	app.put '/user/:id', (req, res) ->
+		currentUser = req.session.currentUser
+		userToUpdate = User.getById req.params.id
+		userToUpdate.update req.body, currentUser, (err, savedUser) ->
+			if socketIO = app.settings.socketIO
+				socketIO.sockets.emit "user:updated", user.toClientObject()
+		res.send ''
+
 
 module.exports = routes

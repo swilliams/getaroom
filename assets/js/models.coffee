@@ -1,4 +1,6 @@
 class User extends Backbone.Model
+	urlRoot: '/user'
+
 	initialize: ->
 
 	formatted: ->

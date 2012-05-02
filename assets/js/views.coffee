@@ -183,8 +183,12 @@ jQuery ->
 
 		initialize: (options) ->
 
+		getModel: ->
+			@model
+
 		render: ->
-			@$el.html @template(@model)
+			model = @getModel()
+			@$el.html @template(model)
 			html = @$el
 			content = 
 				toString: -> 
@@ -216,10 +220,10 @@ jQuery ->
 		initialize: ->
 			@title = @model.get 'name'
 
-		render: ->
-			@model = @model.toJSON()
-			@model.formattedLogin = app.util.formatDate(new Date @model.lastLogin)
-			super()
+		getModel: ->
+			obj = @model.toJSON()
+			obj.formattedLogin = app.util.formatDate(new Date obj.lastLogin)
+			obj
 
 		events: 
 			'submit form' : 'updateUser'
@@ -227,7 +231,7 @@ jQuery ->
 		updateUser: (ev) ->
 			ev.preventDefault()
 			obj = app.util.parseForm @$('form')
-			console.log obj
+			@model.save obj
 
 
 

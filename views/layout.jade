@@ -32,7 +32,7 @@ html
 					div.span1
 						label Logged In
 					div.span2 {{formattedLogin}}
-			if (session.currentUser.isMod)
+			if (session.currentUser && session.currentUser.isMod)
 				form
 					div.row
 						div.span1 

@@ -31,13 +31,25 @@ jQuery ->
 			@userView.render()
 
 		setupChatEntry: ->
-			@chatEntryView = new ChatEntryView
+			newMessage = @createMessage()
+			@chatEntryView = new ChatEntryView model: newMessage
 			@chatEntryView.render()
 			@chatEntryView.focus()
 
 		setupChatView: ->
 			@chatView = new ChatView collection: app.Messages
 			@chatView.render()
+
+		addMessage: (msg) ->
+			msg.set originatedFromHere: true
+			@chatView.renderMessage msg
+			@chatView.model = @createMessage()
+
+		createMessage: ->
+			newMessage = new app.Message
+			newMessage.bind 'change:content', @addMessage, @
+			newMessage
+
 
 	class ChatView extends Backbone.View
 		el: '#chat'
@@ -52,6 +64,10 @@ jQuery ->
 			@
 
 		addMessage: (msg) ->
+			if msg.get('originatedFromHere') or not msg.isUsersMessage()
+				@renderMessage msg
+
+		renderMessage: (msg) ->
 			view = @createMessageView msg
 			@subviews.push view
 			@$el.append view.render().el
@@ -81,10 +97,11 @@ jQuery ->
 
 	class ChatEntryView extends Backbone.View
 		el: '#chat_entry'
+
 		initialize: ->
 
 		events:
-			'submit form' : 'addChat'
+			'submit form' : 'addMessage'
 			'keypress input[name=chat]' : 'keyPressed'
 
 		render: ->
@@ -110,12 +127,11 @@ jQuery ->
 			tab = 9
 			if ev.keyCode == up then @displayLastMessage()
 
-		addChat: (ev) ->
+		addMessage: (ev) ->
 			ev.preventDefault()
 			@lastMessageEntered = @getText()
-			newMessage = new app.Message content: @lastMessageEntered
 			@clearText()
-			newMessage.save()
+			@model.save content: @lastMessageEntered, userId: app.currentUser.id, timestamp: new Date, originatedFromHere: true
 
 	class UserGridView extends Backbone.View
 		el: '#users'

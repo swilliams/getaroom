@@ -3,6 +3,8 @@ class User extends Backbone.Model
 
 class Message extends Backbone.Model
 	url: '/chat'
+	defaults:
+		originatedFromHere: false
 
 	initialize: ->
 

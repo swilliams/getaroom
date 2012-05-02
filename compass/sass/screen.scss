@@ -21,6 +21,10 @@ body {
 	top: 50px;
 } 
 
+.navbar {
+	z-index: 1000;
+}
+
 .navbar .nav > li > form {
 	padding: 10px 10px 0;
 	margin-bottom: 0;
@@ -38,6 +42,10 @@ body {
 		}
 	}
 
+}
+
+.centerText {
+	text-align: center;
 }
 
 #chat {

@@ -18,11 +18,16 @@ body {
 }
 
 /* line 24, ../sass/screen.scss */
+.navbar {
+  z-index: 1000;
+}
+
+/* line 28, ../sass/screen.scss */
 .navbar .nav > li > form {
   padding: 10px 10px 0;
   margin-bottom: 0;
 }
-/* line 28, ../sass/screen.scss */
+/* line 32, ../sass/screen.scss */
 .navbar .nav > li > form > a {
   padding: 0;
   color: #999999;
@@ -31,12 +36,17 @@ body {
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-/* line 36, ../sass/screen.scss */
+/* line 40, ../sass/screen.scss */
 .navbar .nav > li > form > a:hover {
   color: white;
 }
 
-/* line 43, ../sass/screen.scss */
+/* line 47, ../sass/screen.scss */
+.centerText {
+  text-align: center;
+}
+
+/* line 51, ../sass/screen.scss */
 #chat {
   height: 500px;
   overflow: auto;
@@ -49,12 +59,12 @@ body {
   border-radius: 4px;
 }
 
-/* line 51, ../sass/screen.scss */
+/* line 59, ../sass/screen.scss */
 #users_container {
   margin-left: -2px;
 }
 
-/* line 55, ../sass/screen.scss */
+/* line 63, ../sass/screen.scss */
 #users {
   background: rgba(233, 233, 233, 0.7);
   height: 495px;
@@ -75,16 +85,16 @@ body {
   border-bottom-right-radius: 4px;
 }
 
-/* line 67, ../sass/screen.scss */
+/* line 75, ../sass/screen.scss */
 #chat_entry {
   margin-top: 10px;
 }
-/* line 70, ../sass/screen.scss */
+/* line 78, ../sass/screen.scss */
 #chat_entry .chat {
   margin-right: 5px;
 }
 
-/* line 75, ../sass/screen.scss */
+/* line 83, ../sass/screen.scss */
 .row.user {
   height: 24px;
   line-height: 24px;
@@ -102,54 +112,54 @@ body {
 .row.user:last-child {
   border-bottom: 0;
 }
-/* line 84, ../sass/screen.scss */
+/* line 92, ../sass/screen.scss */
 .row.user .span2 {
   width: 138px;
 }
-/* line 88, ../sass/screen.scss */
+/* line 96, ../sass/screen.scss */
 .row.user .username {
   padding-left: 10px;
 }
-/* line 92, ../sass/screen.scss */
+/* line 100, ../sass/screen.scss */
 .row.user .idle {
   font-style: italic;
   color: #aaaaaa;
 }
-/* line 97, ../sass/screen.scss */
+/* line 105, ../sass/screen.scss */
 .row.user:hover {
   background: #f4f4f4;
 }
 
-/* line 103, ../sass/screen.scss */
+/* line 111, ../sass/screen.scss */
 .row.message {
   min-height: 24px;
   line-height: 24px;
   border-bottom: 1px solid #dfdfdf;
 }
-/* line 108, ../sass/screen.scss */
+/* line 116, ../sass/screen.scss */
 .row.message.self_message {
   background: #e8f2f7;
 }
-/* line 112, ../sass/screen.scss */
+/* line 120, ../sass/screen.scss */
 .row.message.mentioned {
   background: #cfe3ee;
 }
-/* line 116, ../sass/screen.scss */
+/* line 124, ../sass/screen.scss */
 .row.message .timestamp {
   position: relative;
   left: -15px;
   color: #aaaaaa;
   font-family: Consolas, Courier New, Courier, monospaced;
 }
-/* line 123, ../sass/screen.scss */
+/* line 131, ../sass/screen.scss */
 .row.message .span1 {
   width: 45px;
 }
-/* line 127, ../sass/screen.scss */
+/* line 135, ../sass/screen.scss */
 .row.message .span5 {
   width: 368px;
 }
-/* line 131, ../sass/screen.scss */
+/* line 139, ../sass/screen.scss */
 .row.message .username {
   padding-left: 8px;
   color: #666666;

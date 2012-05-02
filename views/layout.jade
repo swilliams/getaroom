@@ -33,13 +33,19 @@ html
 						label Logged In
 					div.span2 {{formattedLogin}}
 			if (session.currentUser.isMod)
-				div.row
-					div.span1 
-						label Muted
-					div.span2
-						input(type="checkbox")
-
-
+				form
+					div.row
+						div.span1 
+							label(for="muter") Muted
+						div.span2
+							{{#if isMuted}}
+							input#muter(type="checkbox", name="isMuted", checked="checked")
+							{{else}}
+							input#muter(type="checkbox", name="isMuted")
+							{{/if}}
+					div.row
+						div.span3.centerText
+							input.btn.btn-primary(type="submit", value="Save")
 
 
 	body

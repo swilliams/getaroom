@@ -180,19 +180,21 @@ jQuery ->
 		placement: 'left'
 		isRendered: false
 		triggerType: 'manual'
-		offset: 0
 
 		initialize: (options) ->
 
 		render: ->
 			@$el.html @template(@model)
+			html = @$el
+			content = 
+				toString: -> 
+					replace: -> html
 			$(@triggerElement).popover
 				trigger: @triggerType
 				title: => @title
-				content: => @$el.html()
+				content: => content
 				html: true
 				placement: @placement
-				offset: @offset
 			@isRendered = true
 			@
 
@@ -219,6 +221,13 @@ jQuery ->
 			@model.formattedLogin = app.util.formatDate(new Date @model.lastLogin)
 			super()
 
+		events: 
+			'submit form' : 'updateUser'
+
+		updateUser: (ev) ->
+			ev.preventDefault()
+			obj = app.util.parseForm @$('form')
+			console.log obj
 
 
 

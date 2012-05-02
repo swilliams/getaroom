@@ -13,7 +13,8 @@ routes = (app) ->
 	app.get '/chat', (req, res) ->
 		currentUser = new User req.session.currentUser
 		User.active (err, users) ->
-			clientObjects = _.map users, (u) -> u.toClientObject()
+			clientObjects = _.map users, (u) -> 
+				if currentUser.isMod then u else u.toClientObject()
 			res.render "#{__dirname}/views/main",
 				title: 'OMG Chat!'
 				session: req.session

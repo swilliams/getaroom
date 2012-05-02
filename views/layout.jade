@@ -22,6 +22,25 @@ html
 			div.span1
 				span.timestamp(title="{{fullTimestamp}}") {{formattedTimestamp}}
 
+		script(type="text/template", id="user_popover_template")
+			div.container
+				div.row
+					div.span1 
+						label Twitter
+					div.span2 coming soon
+				div.row
+					div.span1
+						label Logged In
+					div.span2 {{formattedLogin}}
+			if (session.currentUser.isMod)
+				div.row
+					div.span1 
+						label Muted
+					div.span2
+						input(type="checkbox")
+
+
+
 
 	body
 		div.navbar(class="navbar-fixed-top")

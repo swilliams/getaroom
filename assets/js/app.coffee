@@ -9,6 +9,7 @@
 #= require 'collections'
 #= require 'views'
 #= require 'routers'
+#= require 'util'
 
 jQuery ->
 	Backbone.history.start pushState: true

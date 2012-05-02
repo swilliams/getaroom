@@ -156,9 +156,69 @@ jQuery ->
 
 		initialize: ->
 
+		events:
+			'click' : 'togglePopover'
+
 		render: ->
 			@$el.html @template(@model.toJSON())
+			@setupPopover()
 			@
+
+		setupPopover: ->
+			@popover = new UserPopoverView model: @model
+			@popover.triggerElement = @$el
+
+		togglePopover: ->
+			@popover.render() unless @popover.isRendered
+			@popover.toggle()
+
+	class PopoverView extends Backbone.View
+		triggerElement: null
+		isDisplayed: false
+		template: ''
+		title: ''
+		placement: 'left'
+		isRendered: false
+		triggerType: 'manual'
+		offset: 0
+
+		initialize: (options) ->
+
+		render: ->
+			@$el.html @template(@model)
+			$(@triggerElement).popover
+				trigger: @triggerType
+				title: => @title
+				content: => @$el.html()
+				html: true
+				placement: @placement
+				offset: @offset
+			@isRendered = true
+			@
+
+		toggle: ->
+			if @isDisplayed then @hide() else @show()
+
+		show: ->
+			$(@triggerElement).popover 'show'
+			@isDisplayed = true
+			@delegateEvents()
+
+		hide: ->
+			$(@triggerElement).popover 'hide'
+			@isDisplayed = false	
+
+	class UserPopoverView extends PopoverView
+		template: Handlebars.compile $('#user_popover_template').html() ? ''
+
+		initialize: ->
+			@title = @model.get 'name'
+
+		render: ->
+			@model = @model.toJSON()
+			@model.formattedLogin = app.util.formatDate(new Date @model.lastLogin)
+			super()
+
 
 
 

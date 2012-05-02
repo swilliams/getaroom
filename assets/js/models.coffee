@@ -1,6 +1,12 @@
 class User extends Backbone.Model
 	initialize: ->
 
+	formatted: ->
+		json = @toJSON()
+		d = new Date json.lastLogin
+		json.formattedLogin = app.util.formatDate d
+		json
+
 class Message extends Backbone.Model
 	url: '/chat'
 	defaults:
@@ -22,7 +28,7 @@ class Message extends Backbone.Model
 	formatted: ->
 		json = @toJSON()
 		d = new Date json.timestamp
-		json.formattedTimestamp = "#{d.getHours()}:#{d.getMinutes()}:#{d.getSeconds()}"
+		json.formattedTimestamp = app.util.formatDate d
 		json.fullTimestamp = ""
 		user = @_getUserById()
 		json.userName = user.get 'name'

@@ -8,7 +8,7 @@ routes = (app) ->
 			if user is null
 				user = new User name: username
 			user.login ->
-				req.session.currentUser = user.toClientObject()
+				req.session.currentUser = user#.toClientObject()
 				next user
 
 	app.get '/login', (req, res) ->
@@ -22,7 +22,7 @@ routes = (app) ->
 			ip = req.connection.remoteAddress
 			user.addIp ip
 			if socketIO = app.settings.socketIO
-				socketIO.sockets.emit "user:loggedIn", user
+				socketIO.sockets.emit "user:loggedIn", user.toClientObject()
 			req.flash 'info', "You are now #{username}"
 			res.redirect '/chat'
 			return

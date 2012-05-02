@@ -37,7 +37,6 @@ class User extends BaseModel
 		active: true
 		isMod: false
 		ips: []
-		isMuted: false
 		mutedSince: null
 		lastLogin: null
 

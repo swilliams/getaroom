@@ -2,8 +2,11 @@
   "name": "ChattyTime",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "0.6.x",
+    "npm": "1.1.x"
+  },
   "dependencies": {
-    "node": ">= 0.6.0",
     "express": "2.5.8",
     "jade": ">= 0.0.1",
     "coffee-script": "~1.3.1",

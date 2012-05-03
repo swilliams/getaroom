@@ -36,6 +36,12 @@ class Message extends Backbone.Model
 		json.userName = user.get 'name'
 		json
 
+	validate: (attributes) ->
+		maxContentLength = 280
+		errors = []
+		if attributes.content.length > maxContentLength then errors.push message: "Messages must be shorter than 280 characters. That's twice a tweet, Chatty Kathy."
+		if errors.length == 0 then undefined else errors
+
 @app = window.app ? {}
 @app.User = User
 @app.Message = Message

@@ -48,7 +48,11 @@ jQuery ->
 		createMessage: ->
 			newMessage = new app.Message
 			newMessage.bind 'change:content', @addMessage, @
+			newMessage.bind 'error', @invalidMessage, @
 			newMessage
+
+		invalidMessage: (msg, errors) ->
+			console.log errors
 
 
 	class ChatView extends Backbone.View

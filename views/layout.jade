@@ -22,6 +22,7 @@ html
 			div.span1
 				span.timestamp(title="{{fullTimestamp}}") {{formattedTimestamp}}
 
+	if (session.currentUser)
 		script(type="text/template", id="user_popover_template")
 			div.container
 				div.row
@@ -32,7 +33,7 @@ html
 					div.span1
 						label Logged In
 					div.span2 {{formattedLogin}}
-			if (session.currentUser && session.currentUser.isMod)
+			if (session.currentUser.isMod)
 				form
 					div.row
 						div.span1 

@@ -60,3 +60,46 @@ describe "User", ->
 		it "only has the explicitly defined properties", ->
 			clientObj = user.toClientObject()
 			assert.isUndefined clientObj.active
+
+	describe "#save", ->
+		user = null
+		before ->
+			user = new User { id: 100, name: 'swilliams', active: true }
+			user.save = -> true
+
+		it "updates the name if for the user requesting the update", ->
+			attrs = 
+				name: 'honk'
+				id: 100
+			user.name = 'swilliams'
+			user.update attrs, user
+			assert.equal 'honk', user.name
+
+		it "does not update the name if it is not the user requesting the update", ->
+			attrs =
+				name: 'honk'
+				id: 200
+			otherUser = new User { id: 120 }
+			user.name = 'swilliams'
+			user.update attrs, otherUser
+			assert.equal 'swilliams', user.name
+
+		it "updates the mute status if the asking user is a mod", ->
+			attrs = isMuted: true
+			mod = new User isMod: true
+			user.update attrs, mod
+			assert.equal true, user.isMuted
+
+		it "doesn't mute the status if the asking user is not a mod", ->
+			attrs = isMuted: true
+			user.isMuted = false
+			user.update attrs, user
+			assert.equal false, user.isMuted
+
+		it "doesn't mute other mods", ->
+			user.isMuted = false
+			attrs = isMuted: true
+			user.isMod = true
+			user.update attrs, user
+			assert.equal false, user.isMuted
+

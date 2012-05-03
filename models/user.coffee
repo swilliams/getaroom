@@ -88,7 +88,7 @@ class User extends BaseModel
 			@name = attributes.name if attributes.name?
 
 		if whosAsking.isMod
-			if attributes.isMuted then @mute() else @unMute()
+			if attributes.isMuted and not @isMod then @mute() else @unMute()
 
 		@save callback
 

@@ -23,18 +23,18 @@ routes = (app) ->
 
 	app.post '/chat', (req, res) ->
 		msg = new Message req.session.currentUser.id, content: req.body.content
-		user = req.session.currentUser
-		if socketIO = app.settings.socketIO
-			unless user.isMuted
-				socketIO.sockets.emit "msg:received", msg
+		User.getById req.session.currentUser.id, (err, user) -> 
+			if socketIO = app.settings.socketIO
+				unless user.isMuted
+					socketIO.sockets.emit "msg:received", msg
 		res.send ''
 
 	app.put '/user/:id', (req, res) ->
 		currentUser = req.session.currentUser
-		userToUpdate = User.getById req.params.id
-		userToUpdate.update req.body, currentUser, (err, savedUser) ->
-			if socketIO = app.settings.socketIO
-				socketIO.sockets.emit "user:updated", user.toClientObject()
+		User.getById req.params.id, (err, userToUpdate) ->
+			userToUpdate.update req.body, currentUser, (err, savedUser) ->
+				if socketIO = app.settings.socketIO
+					socketIO.sockets.emit "user:updated", savedUser.toClientObject()
 		res.send ''
 
 

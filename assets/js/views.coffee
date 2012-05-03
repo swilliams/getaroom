@@ -141,6 +141,7 @@ jQuery ->
 			@collection.bind 'reset', @render, @
 			@collection.bind 'add', @addUser, @
 			@collection.bind 'remove', @render, @
+			@subviews = []
 
 		render: ->
 			@$el.empty()
@@ -148,7 +149,15 @@ jQuery ->
 
 		addUser: (user) ->
 			view = new UserView model: user
+			view.bind 'popover:shown', @hideActivePopover, @
+			@subviews.push view
 			@$el.append view.render().el
+
+		hideActivePopover: (selectedPopover) ->
+			if @activePopover? and @activePopover != selectedPopover
+				@activePopover.hide()
+			@activePopover = selectedPopover
+
 
 	class UserView extends Backbone.View
 		className: 'row user'
@@ -166,11 +175,17 @@ jQuery ->
 
 		setupPopover: ->
 			@popover = new UserPopoverView model: @model
+			@popover.bind 'popover:shown', (view) => 
+				@trigger 'popover:shown', view
+			, @
 			@popover.triggerElement = @$el
 
 		togglePopover: ->
 			@popover.render() unless @popover.isRendered
 			@popover.toggle()
+
+		hidePopover: ->
+			@popover.hide()
 
 	class PopoverView extends Backbone.View
 		triggerElement: null
@@ -206,6 +221,7 @@ jQuery ->
 			if @isDisplayed then @hide() else @show()
 
 		show: ->
+			@trigger 'popover:shown', @
 			$(@triggerElement).popover 'show'
 			@isDisplayed = true
 			@delegateEvents()
@@ -232,6 +248,7 @@ jQuery ->
 			ev.preventDefault()
 			obj = app.util.parseForm @$('form')
 			@model.save obj
+			@hide()
 
 
 

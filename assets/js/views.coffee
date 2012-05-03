@@ -102,7 +102,8 @@ jQuery ->
 
 		events:
 			'submit form' : 'addMessage'
-			'keypress input[name=chat]' : 'keyPressed'
+			'keyup input[name=chat]' : 'keyPressed'
+			'keydown input[name=chat]' : 'keyDown'
 
 		render: ->
 			@
@@ -122,10 +123,17 @@ jQuery ->
 		displayLastMessage: ->
 			@setText @lastMessageEntered
 
+		completeName: (ev) ->
+			ev.preventDefault()
+			console.log "tab"
+
 		keyPressed: (ev) ->
 			up = 38
-			tab = 9
 			if ev.keyCode == up then @displayLastMessage()
+
+		keyDown: (ev) ->
+			tab = 9
+			if ev.keyCode == tab then @completeName ev
 
 		addMessage: (ev) ->
 			ev.preventDefault()

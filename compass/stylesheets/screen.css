@@ -42,11 +42,17 @@ body {
 }
 
 /* line 47, ../sass/screen.scss */
+button.close {
+  padding: 0;
+  border: 0;
+}
+
+/* line 52, ../sass/screen.scss */
 .centerText {
   text-align: center;
 }
 
-/* line 51, ../sass/screen.scss */
+/* line 56, ../sass/screen.scss */
 #chat {
   height: 500px;
   overflow: auto;
@@ -59,12 +65,12 @@ body {
   border-radius: 4px;
 }
 
-/* line 59, ../sass/screen.scss */
+/* line 64, ../sass/screen.scss */
 #users_container {
   margin-left: -2px;
 }
 
-/* line 63, ../sass/screen.scss */
+/* line 68, ../sass/screen.scss */
 #users {
   background: rgba(233, 233, 233, 0.7);
   height: 495px;
@@ -85,16 +91,16 @@ body {
   border-bottom-right-radius: 4px;
 }
 
-/* line 75, ../sass/screen.scss */
+/* line 80, ../sass/screen.scss */
 #chat_entry {
   margin-top: 10px;
 }
-/* line 78, ../sass/screen.scss */
+/* line 83, ../sass/screen.scss */
 #chat_entry .chat {
   margin-right: 5px;
 }
 
-/* line 83, ../sass/screen.scss */
+/* line 88, ../sass/screen.scss */
 .row.user {
   height: 24px;
   line-height: 24px;
@@ -112,54 +118,54 @@ body {
 .row.user:last-child {
   border-bottom: 0;
 }
-/* line 92, ../sass/screen.scss */
+/* line 97, ../sass/screen.scss */
 .row.user .span2 {
   width: 138px;
 }
-/* line 96, ../sass/screen.scss */
+/* line 101, ../sass/screen.scss */
 .row.user .username {
   padding-left: 10px;
 }
-/* line 100, ../sass/screen.scss */
+/* line 105, ../sass/screen.scss */
 .row.user .idle {
   font-style: italic;
   color: #aaaaaa;
 }
-/* line 105, ../sass/screen.scss */
+/* line 110, ../sass/screen.scss */
 .row.user:hover {
   background: #f4f4f4;
 }
 
-/* line 111, ../sass/screen.scss */
+/* line 116, ../sass/screen.scss */
 .row.message {
   min-height: 24px;
   line-height: 24px;
   border-bottom: 1px solid #dfdfdf;
 }
-/* line 116, ../sass/screen.scss */
+/* line 121, ../sass/screen.scss */
 .row.message.self_message {
   background: #e8f2f7;
 }
-/* line 120, ../sass/screen.scss */
+/* line 125, ../sass/screen.scss */
 .row.message.mentioned {
   background: #cfe3ee;
 }
-/* line 124, ../sass/screen.scss */
+/* line 129, ../sass/screen.scss */
 .row.message .timestamp {
   position: relative;
   left: -15px;
   color: #aaaaaa;
   font-family: Consolas, Courier New, Courier, monospaced;
 }
-/* line 131, ../sass/screen.scss */
+/* line 136, ../sass/screen.scss */
 .row.message .span1 {
   width: 45px;
 }
-/* line 135, ../sass/screen.scss */
+/* line 140, ../sass/screen.scss */
 .row.message .span5 {
   width: 368px;
 }
-/* line 139, ../sass/screen.scss */
+/* line 144, ../sass/screen.scss */
 .row.message .username {
   padding-left: 8px;
   color: #666666;

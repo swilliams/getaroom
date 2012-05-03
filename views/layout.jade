@@ -22,6 +22,13 @@ html
 			div.span1
 				span.timestamp(title="{{fullTimestamp}}") {{formattedTimestamp}}
 
+		script(type="text/template", id="validation_error_template")
+			button.close(data-dismiss="alert") x
+			h4.alert-heading {{title}}
+			{{#each errors}}
+			p {{message}}
+			{{/each}}
+
 	if (session.currentUser)
 		script(type="text/template", id="user_popover_template")
 			div.container

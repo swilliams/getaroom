@@ -52,7 +52,23 @@ jQuery ->
 			newMessage
 
 		invalidMessage: (msg, errors) ->
-			console.log errors
+			errorView = new ValidationErrorView collection: errors
+			$('#main').prepend errorView.render().el
+
+	class ValidationErrorView extends Backbone.View
+		className: "alert fade in"
+		alertLevel: ''
+		template: Handlebars.compile $('#validation_error_template').html() ? ''
+		title: 'Porblem?'
+
+		initialize: ->
+
+		render: ->
+			vm = 
+				title: @title
+				errors: @collection
+			@$el.html @template(vm)
+			@
 
 
 	class ChatView extends Backbone.View

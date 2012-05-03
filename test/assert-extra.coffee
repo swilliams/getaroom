@@ -47,6 +47,10 @@ assert.notNull = (actual, message) ->
   if actual is undefined or actual is null
     assert.fail actual, null, message || "expected value to not be null", "notNull"
 
+assert.isNull = (actual, message) ->
+  if actual is not null
+    assert.fail actual, null, message || "expected value to be null", "isNull"
+
 assert.notUndefined = (actual, message) ->
   if actual is undefined
     assert.fail actual, null, message || "expected value to not be undefined", "notUndefined"

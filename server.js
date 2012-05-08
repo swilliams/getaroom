@@ -11,6 +11,7 @@ var express = require('express'),
 var app = module.exports = express.createServer();
 
 require('./apps/socket-io')(app);
+require('./apps/twitter')(app);
 
 // Configuration
 

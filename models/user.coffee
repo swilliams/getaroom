@@ -33,6 +33,17 @@ class User extends BaseModel
 			activeUsers = _.filter users, (u) -> u.active
 			callback null, activeUsers
 
+	@fromTwitter: (accessToken, accessTokenSecret, twattributes) ->
+		attrs = 
+			name: twattributes.screen_name
+			realName: twattributes.name
+			location: twattributes.location
+			imageUrl: twattributes.profile_image_url
+			url: twattributes.url
+			accessToken: accessToken
+			accessTokenSecret: accessTokenSecret
+		new User attrs
+
 	defaults:
 		active: true
 		isMod: false

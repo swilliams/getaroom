@@ -1,5 +1,5 @@
-redis = require('redis').createClient()
-_	  = require('underscore')
+redis     = require('redis').createClient()
+_	      = require('underscore')
 BaseModel = require('./base')
 
 class User extends BaseModel
@@ -53,7 +53,6 @@ class User extends BaseModel
 
 	defaults:
 		active: true
-		isMod: false
 		ips: []
 		mutedSince: null
 		lastLogin: null
@@ -63,7 +62,7 @@ class User extends BaseModel
 			@id = User.generateId @name
 
 	toClientObject: ->
-		keys = ['name', 'isMod', 'lastLogin', 'id']
+		keys = ['name', 'lastLogin', 'id']
 		_.pick @, keys
 
 	save: (callback) ->
@@ -98,14 +97,6 @@ class User extends BaseModel
 	hasIp: (address) ->
 		_.any @ips, (ip) -> ip == address
 
-	makeMod: ->
-		@isMod = true
-		@save()
-
-	deMod: ->
-		@isMod = false
-		@save()
-
 	mute: ->
 		@isMuted = true
 		@mutedSince = new Date
@@ -114,12 +105,16 @@ class User extends BaseModel
 		@isMuted = false
 		@mutedSince = null
 
+	isMod: ->
+		modList = ['swilliams']
+		_.include modList, @name
+
 	update: (attributes, whosAsking, callback) ->
 		if whosAsking.id == @id
 			@name = attributes.name if attributes.name?
 
-		if whosAsking.isMod
-			if attributes.isMuted and not @isMod then @mute() else @unMute()
+		if whosAsking.isMod()
+			if attributes.isMuted and not @isMod() then @mute() else @unMute()
 
 		@save callback
 

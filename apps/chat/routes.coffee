@@ -10,12 +10,12 @@ routes = (app) ->
 		currentUser = new User req.session.currentUser
 		User.active (err, users) ->
 			clientObjects = _.map users, (u) -> 
-				if currentUser.isMod then u else u.toClientObject()
+				if currentUser.isMod() then u else u.toClientObject()
 			res.render "#{__dirname}/views/main",
 				title: 'OMG Chat!'
 				session: req.session
 				users: clientObjects
-				currentUser: currentUser.toClientObject()
+				currentUser: currentUser#.toClientObject()
 
 	app.post '/chat', (req, res) ->
 		msg = new Message req.session.currentUser.id, content: req.body.content

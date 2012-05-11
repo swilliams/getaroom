@@ -14,6 +14,9 @@ module.exports = (app) ->
 		req.flash 'error', 'Please Sign In First'
 		res.redirect '/login'
 
+	updateCookie = (req, res) ->
+		res.cookie 'sessionId', req.session.id, maxAge: 31536000000
+
 	app.checkLogin = (req, res, next) ->
 		console.log "checkLogin"
 		unless checkForSession req 
@@ -31,6 +34,21 @@ module.exports = (app) ->
 					else
 						redirectToLogin req, res
 
-		# check for session
-		# check for matching session id in cookie
-		# check for ip
+	app.login = (req, res, twitterData, oauthAccesstoken, oauthAccesstokenSecret) ->
+		console.log "logging in"
+		username = twitterData.screen_name
+		# find the user
+		User.getByUsername username, (err, user) ->
+			if user is null
+				console.log "new user"
+				user = User.fromTwitter oauthAccesstoken, oauthAccesstokenSecret, twitterData
+			user.login req.connection.remoteAddress,  ->
+				console.log "logged in"
+				req.session.currentUser = user
+				if socketIO = app.settings.socketIO
+					socketIO.sockets.emit "user:loggedIn", user.toClientObject()
+				req.flash 'info', "You are now #{username}"
+				res.redirect '/chat'
+
+
+

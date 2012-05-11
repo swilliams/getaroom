@@ -58,8 +58,7 @@ routes = (app) ->
 						res.send "error getting screen name: #{err}", 500
 					else
 						data = JSON.parse data
-						req.session.twitterName = data['screen_name']
-						res.send "You are: #{req.session.twitterName}"
+						app.login req, res, data, oauthAccessToken, oauthAccessTokenSecret
 
 
 module.exports = routes

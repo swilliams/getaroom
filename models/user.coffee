@@ -75,15 +75,22 @@ class User extends BaseModel
 		@active = false
 		@save callback
 
-	login: (callback) ->
+	_deleteSession: (sessionId, callback) ->
+		redis.hdel User.sessionKey(), sessionId, @generateId(), (err) ->
+			callback err if callback?
+
+	_saveSession: (sessionId) ->
+		redis.hset User.sessionKey(), sessionId, @generateId()
+
+	login: (ip, callback) ->
 		@active = true
 		@lastLogin = new Date
+		@addIp ip
 		@save callback
 
 	addIp: (address) ->
 		unless _.find(@ips, (ip) -> ip == address)
 			@ips.push address
-			@save()
 
 	hasIp: (address) ->
 		_.any @ips, (ip) -> ip == address

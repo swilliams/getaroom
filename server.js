@@ -12,6 +12,7 @@ var app = module.exports = express.createServer();
 
 require('./apps/socket-io')(app);
 require('./apps/twitter')(app);
+require('./apps/login-helper')(app);
 
 // Configuration
 

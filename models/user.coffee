@@ -6,8 +6,15 @@ class User extends BaseModel
 	@key: ->
 		"User:#{process.env.NODE_ENV}"
 
+	@sessionKey: ->
+		"UserSession:#{process.env.NODE_ENV}"
+
 	@generateId: (text) ->
 		text.replace /\s/g, '-'
+
+	@getIdBySession: (sessionId, callback) ->
+		redis.hget User.sessionKey, sessionId, (err, userId) ->
+			callback null, userId
 
 	@getByUsername: (name, callback) ->
 		id = User.generateId name
@@ -77,6 +84,9 @@ class User extends BaseModel
 		unless _.find(@ips, (ip) -> ip == address)
 			@ips.push address
 			@save()
+
+	hasIp: (address) ->
+		_.any @ips, (ip) -> ip == address
 
 	makeMod: ->
 		@isMod = true

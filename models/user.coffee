@@ -71,16 +71,18 @@ class User extends BaseModel
 		redis.hset User.key(), @id, JSON.stringify(@), (err, resp) =>
 			if callback? then callback null, @
 
-	logout: (callback) ->
+	logout: (sessionId, callback) ->
+		@_deleteSession sessionId
 		@active = false
 		@save callback
 
 	_deleteSession: (sessionId, callback) ->
-		redis.hdel User.sessionKey(), sessionId, @generateId(), (err) ->
+		redis.hdel User.sessionKey(), sessionId, @name, (err) ->
 			callback err if callback?
 
 	_saveSession: (sessionId) ->
-		redis.hset User.sessionKey(), sessionId, @generateId()
+		redis.hset User.sessionKey(), sessionId, @name, (err, resp) =>
+			console.log resp
 
 	login: (sessionId, ip, callback) ->
 		@active = true

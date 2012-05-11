@@ -17,6 +17,9 @@ module.exports = (app) ->
 	updateCookie = (req, res) ->
 		res.cookie 'sessionId', req.session.id, maxAge: 31536000000
 
+	destroyCookie = (res) ->
+		res.cookie 'sessionId', "", maxAge: 1
+
 	app.checkLogin = (req, res, next) ->
 		unless checkForSession req 
 			redirectToLogin req, res
@@ -26,12 +29,16 @@ module.exports = (app) ->
 			return
 		clientIp = req.connection.remoteAddress
 		User.getIdBySession req.session.id, (err, userId) ->
+			console.log "userid: #{userId}"
 			if userId?
 				User.getById userId, (err, user) ->
+					console.log userId
 					if user.hasIp clientIp
 						next()
 					else
 						redirectToLogin req, res
+			else
+				redirectToLogin req, res
 
 	app.login = (req, res, twitterData, oauthAccesstoken, oauthAccesstokenSecret) ->
 		console.log "logging in"
@@ -49,6 +56,18 @@ module.exports = (app) ->
 					socketIO.sockets.emit "user:loggedIn", user.toClientObject()
 				req.flash 'info', "You are now #{username}"
 				res.redirect '/chat'
+
+	app.logout = (req, res) ->
+		console.log "logging out #{res}"
+		destroyCookie res
+		user = new User req.session.currentUser
+		user.logout req.session.id, ->
+			if socketIO = app.settings.socketIO
+				socketIO.sockets.emit "user:loggedOut", user
+			req.session.regenerate (err) ->
+				req.flash 'info', 'You have been logged out'
+				res.redirect '/login'
+
 
 
 

@@ -29,13 +29,14 @@ routes = (app) ->
 		return
 
 	app.post '/logout', (req, res) ->
-		user = new User req.session.currentUser
-		user.logout ->
-			if socketIO = app.settings.socketIO
-				socketIO.sockets.emit "user:loggedOut", user
-			req.session.regenerate (err) ->
-				req.flash 'info', 'You have been logged out'
-				res.redirect '/login'
+		app.logout req, res
+		# user = new User req.session.currentUser
+		# user.logout req.session.id, ->
+		# 	if socketIO = app.settings.socketIO
+		# 		socketIO.sockets.emit "user:loggedOut", user
+		# 	req.session.regenerate (err) ->
+		# 		req.flash 'info', 'You have been logged out'
+		# 		res.redirect '/login'
 
 	app.get '/login/connect', (req, res) ->
 		app.consumer().getOAuthRequestToken (err, oauthToken, oauthTokenSecret, results) ->

@@ -40,7 +40,7 @@ html
 					div.span1
 						label Logged In
 					div.span2 {{formattedLogin}}
-			if (session.currentUser.isMod)
+			if (currentUser.isMod())
 				form
 					div.row
 						div.span1 

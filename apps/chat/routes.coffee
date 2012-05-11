@@ -4,12 +4,7 @@ _ 		= require "underscore"
 
 routes = (app) ->
 	app.all '/chat', (req, res, next) ->
-		app.checkLogin req, res
-		unless req.session.currentUser
-			req.flash 'error', 'You need a name first'
-			res.redirect '/login'
-			return
-		next()
+		app.checkLogin req, res, next
 
 	app.get '/chat', (req, res) ->
 		currentUser = new User req.session.currentUser

@@ -1,13 +1,9 @@
 div.row
 	form.span6(action='/sessions', method='post', class='offset3')
 		header
-			h1 What are you called?
+			h1 Sign In With Twitter
 
 		p
-			| Right now we don't have any fancy-pants "authentication", so just tell us what your name is and move along.
-		label
-			input(type='text', name='user', placeholder='Your Name')
-		input.btn.btn-primary(type='submit', value='Log In')
+			| I know, you're thinking "Oh Em Gee, Twitter? Really?". Yes, Twitter. The reason is that it removes just a little bit of anonymity, which should hopefully elevate the discourse enough to make things worthwhile. And yeah, if that doesn't work we have other moderation options, but we hope we don't have to use them.
 
-div.row
-	a.btn.btn-primary(href="/login/connect") Login with Twitter
+		a.btn.btn-primary(href="/login/connect") Login with Twitter

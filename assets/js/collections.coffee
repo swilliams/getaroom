@@ -6,7 +6,7 @@ class Users extends Backbone.Collection
 	setupSocket: ->
 		socket = io.connect '/'
 		socket.on "user:loggedIn", (user) =>
-			@add new App.User(user)
+			@add new app.User(user)
 		socket.on "user:loggedOut", (user) =>
 			@remove user.id
 

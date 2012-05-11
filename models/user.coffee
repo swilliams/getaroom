@@ -13,7 +13,7 @@ class User extends BaseModel
 		text.replace /\s/g, '-'
 
 	@getIdBySession: (sessionId, callback) ->
-		redis.hget User.sessionKey, sessionId, (err, userId) ->
+		redis.hget User.sessionKey(), sessionId, (err, userId) ->
 			callback null, userId
 
 	@getByUsername: (name, callback) ->
@@ -82,10 +82,11 @@ class User extends BaseModel
 	_saveSession: (sessionId) ->
 		redis.hset User.sessionKey(), sessionId, @generateId()
 
-	login: (ip, callback) ->
+	login: (sessionId, ip, callback) ->
 		@active = true
 		@lastLogin = new Date
 		@addIp ip
+		@_saveSession sessionId
 		@save callback
 
 	addIp: (address) ->

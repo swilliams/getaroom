@@ -6,8 +6,8 @@ module.exports = (app) ->
 		req.session.currentUser
 
 	checkForCookie = (req) ->
-		console.log "cookie check"
-		req.session.id? and req.session.id == req.cookies['sessionId']
+		console.log "cookie check #{req.session.id}"
+		req.session.id? and req.session.id == req.cookies['connect.sid']
 
 	redirectToLogin = (req, res) ->
 		console.log "Redirect"
@@ -18,7 +18,6 @@ module.exports = (app) ->
 		res.cookie 'sessionId', req.session.id, maxAge: 31536000000
 
 	app.checkLogin = (req, res, next) ->
-		console.log "checkLogin"
 		unless checkForSession req 
 			redirectToLogin req, res
 			return
@@ -30,7 +29,7 @@ module.exports = (app) ->
 			if userId?
 				User.getById userId, (err, user) ->
 					if user.hasIp clientIp
-						next user
+						next()
 					else
 						redirectToLogin req, res
 
@@ -42,7 +41,8 @@ module.exports = (app) ->
 			if user is null
 				console.log "new user"
 				user = User.fromTwitter oauthAccesstoken, oauthAccesstokenSecret, twitterData
-			user.login req.connection.remoteAddress,  ->
+			updateCookie req, res
+			user.login req.session.id, req.connection.remoteAddress,  ->
 				console.log "logged in"
 				req.session.currentUser = user
 				if socketIO = app.settings.socketIO
